@@ -6,6 +6,8 @@
 全局引用`<DoSnackbar/>`，再在需要的地方修改显示`showSb({open: true, message: "消息1。"})`：
 
 ``` typescript
+import {DoSnackbar, useSharedSnackbar} from "./main"
+
 function App() {
   const {showSb} = useSharedSnackbar()
 
@@ -30,6 +32,7 @@ function App() {
 在需要的地方引用`<DoSvgIcon svg={IconSettings}/>`：
 
 ```typescript
+import {DoSvgIcon} from "./main"
 import {ReactComponent as IconSettings} from "./test/icons/settings.svg"
 
 function App() {
