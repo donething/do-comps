@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Button, Stack} from "@mui/material"
+import {DoSnackbar, useSharedSnackbar} from "./main"
 
 function App() {
+  const {showSb} = useSharedSnackbar()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Stack>
+      <DoSnackbar/>
+
+      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
+        打开 Snakebar1
+      </Button>
+
+      <Button onClick={() => showSb({open: true, message: "消息2。"})}>
+        打开 Snakebar2
+      </Button>
+    </Stack>
+  )
 }
 
-export default App;
+export default App
