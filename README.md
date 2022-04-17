@@ -1,57 +1,42 @@
-# Getting Started with Create React App
+# do-comps
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 已编写组件
 
-## Available Scripts
+### DoSnackbar
+全局引用`<DoSnackbar/>`，再在需要的地方修改显示`showSb({open: true, message: "消息1。"})`：
 
-In the project directory, you can run:
+``` typescript
+function App() {
+  const {showSb} = useSharedSnackbar()
 
-### `yarn start`
+  return (
+    <Stack>
+      <DoSnackbar/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
+        打开 Snakebar1
+      </Button>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+      <Button onClick={() => showSb({open: true, message: "消息2。"})}>
+        打开 Snakebar2
+      </Button>
+    </Stack>
+  )
+}
+```
 
-### `yarn test`
+### DoSvgIcon
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more
-information.
+在需要的地方引用`<DoSvgIcon svg={IconSettings}/>`：
 
-### `yarn build`
+```typescript
+import {ReactComponent as IconSettings} from "./test/icons/settings.svg"
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will
-remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right
-into your project so you have full control over them. All of the commands except `eject` will still work, but they will
-point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you
-shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in
-the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-## 文件说明
-
-在`src/components`文件夹下创建组件，在`src/main.ts`中添加索引。其它 文件/夹 是为打包、测试。
+function App() {
+  return (
+    <Stack>
+      <DoSvgIcon svg={IconSettings}/>
+    </Stack>
+  )
+}
+```
