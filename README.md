@@ -1,5 +1,7 @@
 # do-comps
 
+使用`yarn build`编译完成后，需要删除`dist/types`文件夹
+
 ## 已编写组件
 
 ### DoSnackbar
