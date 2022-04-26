@@ -1,24 +1,17 @@
 import {Button, Stack} from "@mui/material"
-import {DoSnackbar, DoSvgIcon, useSharedSnackbar} from "./main"
-// @ts-ignore why?
-import {ReactComponent as IconSettings} from "./test/icons/settings.svg"
+import {Link} from "react-router-dom"
 
 function App() {
-  const {showSb} = useSharedSnackbar()
-
   return (
-    <Stack>
-      <DoSnackbar/>
-
-      <DoSvgIcon svg={IconSettings}/>
-
-      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
-        打开 Snakebar1
-      </Button>
-
-      <Button onClick={() => showSb({open: true, message: "消息2。"})}>
-        打开 Snakebar2
-      </Button>
+    <Stack alignItems={"center"} gap={4}
+           sx={{width: "100%", height: "100%", bgcolor: "background.paper", paddingTop: 10}}>
+      <Link to={"DoSnackbar_Dialog"}><Button size={"large"}>DoSnackbar_Dialog</Button></Link>
+      <Link to={"DoVpanel"}><Button size={"large"}>DoVpanel</Button></Link>
+      <Link to={"DoTextFieldBtn"}><Button size={"large"}>DoTextFieldBtn</Button></Link>
+      <Link to={"DoOptionsInput"}><Button size={"large"}>DoOptionsInput</Button></Link>
+      <Link to={"DoListAdd"}><Button size={"large"}>DoListAdd</Button></Link>
+      <Link to={"DoBackupPanel"}><Button size={"large"}>DoBackupPanel</Button></Link>
+      <Link to={"DoDelRevoke"}><Button size={"large"}>DoDelRevoke</Button></Link>
     </Stack>
   )
 }
