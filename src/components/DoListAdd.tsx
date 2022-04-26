@@ -41,7 +41,7 @@ export type DoLItemProps = {
 // 生成列表项
 const LItem = (props: DoLItemProps): JSX.Element => {
   return (
-    <ListItem component={"li"} divider alignItems={"center"}
+    <ListItem component={"li"} divider={props.divider} alignItems={"center"}
               sx={{
                 paddingTop: 0,
                 paddingBottom: 0,
