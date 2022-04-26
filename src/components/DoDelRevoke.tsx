@@ -96,11 +96,13 @@ export const delRevokeArray = function <D, M = void>(title: string | number,
       // 恢复项目
       dataList.splice(iData, 0, deledDataList[0])
       // 如果存在项目的信息，恢复相应的数据
+      let revokedInfoListRevoked: Array<M> | undefined = undefined
       if (newInfoList && deledInfoList) {
-        let revokedInfoListRevoked = [...newInfoList]
+        revokedInfoListRevoked = [...newInfoList]
         revokedInfoListRevoked.splice(iInfo, 0, deledInfoList[0])
       }
 
+      update(dataList, revokedInfoListRevoked)
       showSb({open: false})
     }}>撤销</Button>
   })
