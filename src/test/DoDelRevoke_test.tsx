@@ -1,7 +1,7 @@
 import {Button, Stack} from "@mui/material"
 import {useState} from "react"
 import {delRevoke, useSharedSnackbar} from "../main"
-import {delRevokeArray} from "../components/DoDelRevoke"
+import {delRevokeArray} from "../main"
 
 export const DoDelRevokeTest = () => {
   const [nums, setNums] = useState([1, 2, 3])

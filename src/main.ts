@@ -5,7 +5,7 @@ import DoVPanel, {VPanelProps} from "./components/DoVPanel"
 import DoTextFieldBtn, {DoTextFieldBtnType} from "./components/DoTextFieldBtn"
 import DoOptionsInput, {OptionsListType, DoOptionsInputProps} from "./components/DoOptionsInput"
 import DoListAdd, {DoListAddProps, DoLItemProps} from "./components/DoListAdd"
-import {delRevoke} from "./components/DoDelRevoke"
+import {delRevoke, delRevokeArray} from "./components/DoDelRevoke"
 import DoBackupPanel, {
   DoBackupPanelChromium,
   DoBackupPanelProps,
@@ -15,7 +15,7 @@ import DoBackupPanel, {
 export {DoBackupPanel, DoBackupPanelChromium}
 export type {DoBackupPanelProps, DoBackupPanelBaseProps}
 
-export {delRevoke}
+export {delRevoke, delRevokeArray}
 
 export {DoDialog, useSharedDialog}
 export type {DoDialogProps, DoDialogBtnProps}
