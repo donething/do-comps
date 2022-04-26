@@ -38,7 +38,7 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
 
   return (
     <Card sx={{width: 300}} {...props.cardProps}>
-      <CardHeader title={props.title || "配置"} action={<Button color={"warning"} onClick={() => {
+      <CardHeader title={props.title} action={<Button variant={"outlined"} color={"warning"} onClick={() => {
         showDialog({
           open: true,
           title: `清除 ${props.title} 存储的数据`,
@@ -128,8 +128,8 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
 // 依赖 <DoSnackbar/>、<DoDialog/> 组件，可在`index.tsx`全局引入
 export const DoBackupPanelChromium = (props: DoBackupPanelBaseProps): JSX.Element => {
   return (
-    <DoBackupPanel title={props.title || "Chromium Storage"}
-                   filename={props.filename || `${chrome.runtime.getManifest().nam}.json`}
+    <DoBackupPanel title={props.title || "Storage"}
+                   filename={props.filename || `${chrome.runtime.getManifest().name}.json`}
 
                    onClear={async () => {
                      // 清空存储的配置
