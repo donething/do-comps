@@ -1,14 +1,6 @@
 import React from "react"
-import {
-  Avatar, Box,
-  IconButton,
-  ListItem,
-  ListItemAvatar,
-  ListItemText, Theme,
-} from "@mui/material"
-import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
+import {Avatar, Box, ListItem, ListItemAvatar, ListItemText, SxProps, Theme} from "@mui/material"
 import {DoOptionsInput, DoOptionsInputProps, DoVPanel} from "../main"
-import {SxProps} from "@mui/system"
 import {alpha} from '@mui/material/styles'
 
 // 列表项的参数
@@ -33,10 +25,7 @@ export type DoLItemProps = {
   isNewAdded?: boolean
 
   // 其它按钮
-  extra?: Array<React.ReactNode>
-
-  // 点击了删除按钮的回调
-  onDel?: () => void
+  extra?: React.ReactNode
 }
 
 // 生成列表项
@@ -63,12 +52,8 @@ const LItem = (props: DoLItemProps): JSX.Element => {
       {/* 内容 */}
       <ListItemText primary={props.primary} secondary={props.secondary}/>
 
-      {
-        // 删除
-        props.onDel && <IconButton aria-label="删除" onClick={_ => props.onDel && props.onDel()}>
-          <HighlightOffOutlinedIcon sx={{width: 28, height: 28}}/>
-        </IconButton>
-      }
+      {/* 操作按钮 */}
+      {props.extra}
     </ListItem>
   )
 }

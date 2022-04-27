@@ -1,6 +1,6 @@
-import {DoListAdd, DoLItemProps} from "../main"
+import {DoListAdd, DoLItemProps, DoOptionsInputProps} from "../main"
 import {useEffect, useState} from "react"
-import {DoOptionsInputProps} from "../main"
+import {Stack, Switch} from "@mui/material"
 
 export const DoListAddTest = () => {
   const [list, setList] = useState<Array<DoLItemProps>>([])
@@ -51,7 +51,12 @@ export const DoListAddTest = () => {
         avatar: "",
         primary: "zhang",
         secondary: "san",
-        isNewAdded: true
+        isNewAdded: true,
+        extra: <Stack direction={"row"} alignItems={"center"}>
+          <span>测试</span>
+          <Switch aria-labe={"开关1"}/>
+          <Switch aria-labe={"开关1"}/>
+        </Stack>
       }])
     }
 
