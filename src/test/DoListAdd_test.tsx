@@ -27,10 +27,32 @@ export const DoListAddTest = () => {
 
   useEffect(() => {
     const init = () => {
-      setList(prev => [...prev, {id: 1, primary: "hello", secondary: "world", isMarked: true}])
-      setList(prev => [...prev, {id: 2, primary: "zhang", secondary: "san"}])
-      setList(prev => [...prev, {id: 3, primary: "zhang", secondary: "san"}])
-      setList(prev => [...prev, {id: 4, primary: "zhang", secondary: "san", isNewAdded: true}])
+      setList(prev => [...prev, {
+        id: 1,
+        avatar: "https://huyaimg.msstatic.com/avatar/1050/ff/927a25d35eab6729f4cdb59f13ce37_180_135.jpg",
+        primary: "hello",
+        secondary: "world",
+        isMarked: true
+      }])
+      setList(prev => [...prev, {
+        id: 2,
+        avatar: "https://huyaimg.msstatic.com/avatar/1050/ff/927a25d35eab6729f4cdb59f13ce37_180_135.jpg",
+        primary: "zhang",
+        secondary: "san"
+      }])
+      setList(prev => [...prev, {
+        id: 3,
+        avatar: "https://huyaimg.msstatic.com/avatar/1050/ff/927a25d35eab6729f4cdb59f13ce37_180_135.jpg",
+        primary: "zhang",
+        secondary: "san"
+      }])
+      setList(prev => [...prev, {
+        id: 4,
+        avatar: "https://huyaimg.msstatic.com/avatar/1050/ff/927a25d35eab6729f4cdb59f13ce37_180_135.jpg",
+        primary: "zhang",
+        secondary: "san",
+        isNewAdded: true
+      }])
     }
 
     init()

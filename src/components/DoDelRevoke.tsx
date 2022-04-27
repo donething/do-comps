@@ -49,24 +49,21 @@ export const delRevoke = function <T>(title: string | number,
  * @param findInfo 查找待删除数据的信息所在的索引
  * @param update 保存数据到存储、更新界面
  */
-export const delRevokeArray = function <D, M = void>(title: string | number,
-                                                     showSb: (ps: DoSnackbarProps) => void,
-                                                     data: D,
-                                                     dataList: Array<D>,
-                                                     findData: (d1: D, d2: D) => boolean,
-                                                     update: (newDataList: Array<D>, newInfoList?: Array<M>) => void,
-                                                     info?: M,
-                                                     infoList?: Array<M>,
-                                                     findInfo?: (m1: M, m2: M) => boolean): void {
+export const delRevokeArray = <D, M = void>(title: string | number,
+                                            showSb: (ps: DoSnackbarProps) => void,
+                                            data: D,
+                                            dataList: Array<D>,
+                                            findData: (d1: D, d2: D) => boolean,
+                                            update: (newDataList: Array<D>, newInfoList?: Array<M>) => void,
+                                            info?: M,
+                                            infoList?: Array<M>,
+                                            findInfo?: (m1: M, m2: M) => boolean): void => {
   // 查找待删除项目的索引
   let iData = dataList.findIndex(item => findData(item, data))
   if (iData < 0) {
-    console.log("待删除的数据不存在，直接返回")
+    console.log("无法找到待删除数据的索引，直接返回")
     return
   }
-
-  // 删除项目，保存被删除的数据
-  let deledDataList = dataList.splice(iData, 1)
 
   // 如果存在项目的信息，删除相应的数据
   let iInfo: number
@@ -75,7 +72,7 @@ export const delRevokeArray = function <D, M = void>(title: string | number,
   if (info && infoList && findInfo) {
     iInfo = infoList.findIndex(item => findInfo(item, info))
     if (iInfo < 0) {
-      console.log("无法找到待删除数据的索引，直接返回")
+      console.log("无法找到待删除数据的信息的索引，直接返回")
       return
     }
 
@@ -83,6 +80,9 @@ export const delRevokeArray = function <D, M = void>(title: string | number,
     newInfoList = [...infoList]
     deledInfoList = newInfoList.splice(iInfo, 1)
   }
+
+  // 正式删除项目，保存被删除的数据
+  let deledDataList = dataList.splice(iData, 1)
 
   // 保存修改、更新界面，如保存到 chromium storage
   update(dataList, newInfoList)

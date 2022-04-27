@@ -62,7 +62,7 @@ const LItem = (props: DoLItemProps): JSX.Element => {
 
       {
         // 删除
-        props.onDel && <IconButton color={"warning"} aria-label="删除" onClick={_ => props.onDel && props.onDel()}>
+        props.onDel && <IconButton aria-label="删除" onClick={_ => props.onDel && props.onDel()}>
           <HighlightOffOutlinedIcon sx={{width: 28, height: 28}}/>
         </IconButton>
       }
