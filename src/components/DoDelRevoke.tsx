@@ -1,5 +1,6 @@
 import {DoSnackbarProps} from "../main"
 import {Button} from "@mui/material"
+import React from "react"
 
 /**
  * 删除项目，并提供撤销功能
@@ -42,21 +43,21 @@ export const delRevoke = function <T>(title: string | number,
  * @param title 已删除元素的标题，不需要完整提示，如 “弥珠(162345)”
  * @param showSb 控制 DoSnackbar ，显示撤销按钮
  * @param data 待删除的项目
- * @param info 待删除的项目的信息
  * @param dataList 包含待删除数据的数组
- * @param infoList 包含待删除数据信息的数组
  * @param findData 查找待删除数据所在的索引
+ * @param info 待删除的项目的信息
+ * @param setInfos 删除、撤销数据信息
  * @param findInfo 查找待删除数据的信息所在的索引
- * @param update 保存数据到存储、更新界面
+ * @param update 保存数据到存储
  */
 export const delRevokeArray = <D, M = void>(title: string | number,
                                             showSb: (ps: DoSnackbarProps) => void,
                                             data: D,
                                             dataList: Array<D>,
                                             findData: (d1: D, d2: D) => boolean,
-                                            update: (newDataList: Array<D>, newInfoList?: Array<M>) => void,
+                                            update: (newDataList: Array<D>) => void,
                                             info?: M,
-                                            infoList?: Array<M>,
+                                            setInfos?: React.Dispatch<React.SetStateAction<Array<M>>>,
                                             findInfo?: (m1: M, m2: M) => boolean): void => {
   // 查找待删除项目的索引
   let iData = dataList.findIndex(item => findData(item, data))
@@ -67,25 +68,27 @@ export const delRevokeArray = <D, M = void>(title: string | number,
 
   // 如果存在项目的信息，删除相应的数据
   let iInfo: number
-  let newInfoList: Array<M> | undefined = undefined
   let deledInfoList: Array<M> | undefined = undefined
-  if (info && infoList && findInfo) {
-    iInfo = infoList.findIndex(item => findInfo(item, info))
-    if (iInfo < 0) {
-      console.log("无法找到待删除数据的信息的索引，直接返回")
-      return
-    }
+  if (info && setInfos && findInfo) {
+    setInfos(prev => {
+      iInfo = prev.findIndex(item => findInfo(item, info))
+      if (iInfo < 0) {
+        console.log("无法找到待删除数据的信息的索引，直接返回")
+        return prev
+      }
 
-    // 删除项目的信息
-    newInfoList = [...infoList]
-    deledInfoList = newInfoList.splice(iInfo, 1)
+      // 删除项目的信息
+      let newInfoList = [...prev]
+      deledInfoList = newInfoList.splice(iInfo, 1)
+      return newInfoList
+    })
   }
 
   // 正式删除项目，保存被删除的数据
   let deledDataList = dataList.splice(iData, 1)
 
   // 保存修改、更新界面，如保存到 chromium storage
-  update(dataList, newInfoList)
+  update(dataList)
 
   // 显示撤销删除的按钮
   showSb({
@@ -95,14 +98,20 @@ export const delRevokeArray = <D, M = void>(title: string | number,
     action: <Button variant={"text"} color={"primary"} onClick={() => {
       // 恢复项目
       dataList.splice(iData, 0, deledDataList[0])
+      update(dataList)
+
       // 如果存在项目的信息，恢复相应的数据
-      let revokedInfoListRevoked: Array<M> | undefined = undefined
-      if (newInfoList && deledInfoList) {
-        revokedInfoListRevoked = [...newInfoList]
-        revokedInfoListRevoked.splice(iInfo, 0, deledInfoList[0])
+      if (setInfos && deledInfoList) {
+        setInfos(prev => {
+          if (deledInfoList) {
+            let revokedInfos = [...prev]
+            revokedInfos.splice(iInfo, 0, deledInfoList[0])
+            return revokedInfos
+          }
+          return []
+        })
       }
 
-      update(dataList, revokedInfoListRevoked)
       showSb({open: false})
     }}>撤销</Button>
   })
