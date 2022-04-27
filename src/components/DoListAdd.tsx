@@ -9,6 +9,7 @@ import {
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined'
 import {DoOptionsInput, DoOptionsInputProps, DoVPanel} from "../main"
 import {SxProps} from "@mui/system"
+import {alpha} from '@mui/material/styles'
 
 // 列表项的参数
 export type DoLItemProps = {
@@ -18,7 +19,7 @@ export type DoLItemProps = {
   primary: React.ReactNode
   // 描述
   secondary?: React.ReactNode
-  // 头像
+  // 头像，为 undefined 时不渲染
   avatar?: string
   // 头像样式，其中宽、高度默认为 36
   avatarSx?: SxProps<Theme>
@@ -47,13 +48,15 @@ const LItem = (props: DoLItemProps): JSX.Element => {
                 paddingBottom: 0,
                 paddingLeft: 1,
                 paddingRight: 1,
-                bgcolor: props.isNewAdded ? "#FFFFCC" : props.isMarked ? "#99CC99" : "inherit"
+                bgcolor: props.isNewAdded ? alpha("#FFFFCC", 0.6) :
+                  props.isMarked ? alpha("#99CC99", 0.6) :
+                    "inherit"
               }}
     >
       {
         // 头像
-        props.avatar && <ListItemAvatar>
-          <Avatar sx={{width: 36, height: 36, ...props.avatarSx}} src={props.avatar}/>
+        props.avatar !== undefined && <ListItemAvatar sx={{minWidth: 0, marginRight: 1}}>
+          <Avatar src={props.avatar} sx={{width: 36, height: 36, ...props.avatarSx}}/>
         </ListItemAvatar>
       }
 

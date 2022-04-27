@@ -48,7 +48,7 @@ export const DoListAddTest = () => {
       }])
       setList(prev => [...prev, {
         id: 4,
-        avatar: "https://huyaimg.msstatic.com/avatar/1050/ff/927a25d35eab6729f4cdb59f13ce37_180_135.jpg",
+        avatar: "",
         primary: "zhang",
         secondary: "san",
         isNewAdded: true
