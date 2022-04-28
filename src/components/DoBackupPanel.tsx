@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, CardProps, Stack} from "@mui/material"
+import {Button, Card, CardContent, CardHeader, CardProps, Divider} from "@mui/material"
 import {useSharedDialog, useSharedSnackbar} from "../main"
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import CenterFocusStrongOutlinedIcon from '@mui/icons-material/CenterFocusStrongOutlined'
@@ -38,7 +38,7 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
 
   return (
     <Card sx={{width: 300}} {...props.cardProps}>
-      <CardHeader title={props.title} action={<Button variant={"outlined"} color={"warning"} onClick={() => {
+      <CardHeader title={props.title} action={<Button color={"warning"} onClick={() => {
         showDialog({
           open: true,
           title: `清除 ${props.title} 存储的数据`,
@@ -60,64 +60,64 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
         })
       }}>清除</Button>}/>
 
-      <CardContent>
-        <Stack spacing={2}>
-          {/* 从文件恢复配置 */}
-          <label htmlFor="do-backup-file">
-            <input accept={"*"} type="file" id={"do-backup-file"} hidden onChange={async event => {
-              let files = event.target.files
-              if (!files || files.length === 0) {
-                console.log("没有选择备份文件")
-                return
-              }
+      <Divider/>
 
-              // 解析数据
-              let text = await files[0].text()
-              let data: { sync?: object, local?: object } = {}
-              try {
-                data = JSON.parse(text)
-              } catch (e) {
-                console.error("导入备份数据出错，无法解析JSON文本：", e)
-                showSb({open: true, message: "导入备份数据出错，无法解析JSON文本", severity: "error"})
-                return
-              }
+      <CardContent sx={{display: "flex", flexFlow: "column nowrap", gap: 2}}>
+        {/* 从文件恢复配置 */}
+        <label htmlFor="do-backup-file">
+          <input accept={"*"} type="file" id={"do-backup-file"} hidden onChange={async event => {
+            let files = event.target.files
+            if (!files || files.length === 0) {
+              console.log("没有选择备份文件")
+              return
+            }
 
-              // 恢复
-              await props.onRestore(data)
+            // 解析数据
+            let text = await files[0].text()
+            let data: { sync?: object, local?: object } = {}
+            try {
+              data = JSON.parse(text)
+            } catch (e) {
+              console.error("导入备份数据出错，无法解析JSON文本：", e)
+              showSb({open: true, message: "导入备份数据出错，无法解析JSON文本", severity: "error"})
+              return
+            }
 
-              console.log("已恢复备份的数据")
-              showSb({open: true, message: "已恢复备份的数据", severity: "success"})
-              // 刷新组件
-              window.location.reload()
-              // 取消上传文件的操作
-              return false
-            }}/>
-            {/* `component`属性须为`span`，点击按钮时才会弹文件出选择框 */}
-            <Button variant="outlined" fullWidth component="span" startIcon={<FileUploadOutlinedIcon/>}>
-              导入配置
-            </Button>
-          </label>
+            // 恢复
+            await props.onRestore(data)
 
-          {/* 浏览配置 */}
-          <Button variant="outlined" startIcon={<CenterFocusStrongOutlinedIcon/>} onClick={async _ => {
-            // 读取数据
-            let data = await props.onRead()
+            console.log("已恢复备份的数据")
+            showSb({open: true, message: "已恢复备份的数据", severity: "success"})
+            // 刷新组件
+            window.location.reload()
+            // 取消上传文件的操作
+            return false
+          }}/>
+          {/* `component`属性须为`span`，点击按钮时才会弹文件出选择框 */}
+          <Button variant="outlined" fullWidth component="span" startIcon={<FileUploadOutlinedIcon/>}>
+            导入配置
+          </Button>
+        </label>
 
-            showDialog({
-              open: true,
-              title: `${props.title} 存储的数据`,
-              fullWidth: true,
-              message: JSON.stringify(data, null, 2)
-            })
-          }}>浏览配置</Button>
+        {/* 浏览配置 */}
+        <Button variant="outlined" startIcon={<CenterFocusStrongOutlinedIcon/>} onClick={async _ => {
+          // 读取数据
+          let data = await props.onRead()
 
-          {/*  保存配置到本地 */}
-          <Button variant="outlined" startIcon={<FileDownloadOutlinedIcon/>} onClick={async _ => {
-            // 下载
-            download(props.onRead(), props.filename || `${Date.now()}.json`)
-            console.log("已保存配置到下载目录")
-          }}>下载配置</Button>
-        </Stack>
+          showDialog({
+            open: true,
+            title: `${props.title} 存储的数据`,
+            fullWidth: true,
+            message: JSON.stringify(data, null, 2)
+          })
+        }}>浏览配置</Button>
+
+        {/*  保存配置到本地 */}
+        <Button variant="outlined" startIcon={<FileDownloadOutlinedIcon/>} onClick={async _ => {
+          // 下载
+          download(props.onRead(), props.filename || `${Date.now()}.json`)
+          console.log("已保存配置到下载目录")
+        }}>下载配置</Button>
       </CardContent>
     </Card>
   )
