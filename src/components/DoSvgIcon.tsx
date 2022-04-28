@@ -12,6 +12,8 @@ export type DoSvgIconProps = {
 }
 
 // 生成 Icon 图标
+//
+// `viewBox`参数应和`SVG`文件内的`viewBox`属性保持一直
 const DoSvgIcon = (
   {
     svg,

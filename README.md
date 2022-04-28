@@ -214,11 +214,13 @@ function App() {
 
 组件：图标
 
-在需要的地方引用`<DoSvgIcon svg={IconSettings}/>`：
+可以将`SVG`文件缩放为适应父组件的大小，在需要的地方引用`<DoSvgIcon svg={IconSettings}/>`：
 
 ```jsx
 import {DoSvgIcon} from "./main"
+// webpack 中
 import {ReactComponent as IconSettings} from "./test/icons/settings.svg"
+// snowpack 中可配合`snowpack-plugin-svgr`插件使用
 
 function App() {
   return (
