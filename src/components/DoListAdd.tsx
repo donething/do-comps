@@ -82,7 +82,7 @@ export type DoListAddProps = {
  */
 const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
-    <DoVPanel sx={props.sx} title={props.title} slot={props.slot} content={
+    <DoVPanel sx={props.sx} header={{title: props.title, action: props.slot}} content={
       <Box component={"ul"}>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </Box>

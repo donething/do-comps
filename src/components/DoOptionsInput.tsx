@@ -74,11 +74,11 @@ const DoOptionsInput = function (props: DoOptionsInputProps): JSX.Element {
   }
 
   return (
-    <Stack direction={"row"}>
+    <Stack direction={"row"} boxSizing={"border-box"} width={"100%"}>
       <Stack direction={"row"}>
         {selectsList}
       </Stack>
-      <DoTextFieldBtn label={props.placeholder} size={props.size} enterNode={props.enterNode} sx={{width: "100%"}}
+      <DoTextFieldBtn label={props.placeholder} size={props.size} enterNode={props.enterNode}
                       onEnter={value => props.onEnter(value, sList)}/>
     </Stack>
   )

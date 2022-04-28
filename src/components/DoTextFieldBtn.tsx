@@ -21,30 +21,28 @@ const DoTextFieldBtn = (props: DoTextFieldBtnType): JSX.Element => {
   const {enterNode, onEnter, ...ps} = props
 
   return (
-    <TextField
-      {...ps}
-      value={value}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <Box onClick={() => onEnter && onEnter(value)}>
-              {
-                typeof enterNode === "string" ?
-                  <Button variant={"contained"} disableElevation>{enterNode}</Button> :
-                  enterNode
-              }
-            </Box>
-          </InputAdornment>
-        ),
-        style: {paddingRight: 0}
-      }}
-      onChange={event => setValue(event.target.value)}
-      onKeyDown={event => {
-        if (event.key === "Enter") {
-          onEnter && onEnter(value)
-          event.preventDefault()
-        }
-      }}
+    <TextField{...ps} value={value} fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Box onClick={() => onEnter && onEnter(value)}>
+                      {
+                        typeof enterNode === "string" ?
+                          <Button variant={"contained"} disableElevation>{enterNode}</Button> :
+                          enterNode
+                      }
+                    </Box>
+                  </InputAdornment>
+                ),
+                style: {paddingRight: 0}
+              }}
+              onChange={event => setValue(event.target.value)}
+              onKeyDown={event => {
+                if (event.key === "Enter") {
+                  onEnter && onEnter(value)
+                  event.preventDefault()
+                }
+              }}
     />
   )
 }

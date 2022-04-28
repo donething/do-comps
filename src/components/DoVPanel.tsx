@@ -1,56 +1,76 @@
 import React from "react"
-import {Box, Divider, Stack, Theme, Typography} from "@mui/material"
+import {Card, CardActions, CardContent, CardHeader, Divider, Theme,} from "@mui/material"
 import {SxProps} from "@mui/system"
 
 // 垂直布局的面板的参数
 export type VPanelProps = {
-  // 面板头的标题
-  title: string
-  // 面板头右边的操作区域
-  slot?: JSX.Element
+  // 头部
+  header?: {
+    // 右侧的工具按钮
+    action?: React.ReactNode,
+    // 左侧的头像，可传递 <Avatar src={"https://example.com/favicon.ico"}/>
+    avatar?: React.ReactNode
+    // 不用 Typography 包装 主、子标题
+    disableTypography?: boolean
+    // 主标题
+    title?: React.ReactNode,
+    // 子标题
+    subheader?: React.ReactNode,
+  }
+  // 头部样式，已设"flex"
+  sxHeader?: SxProps<Theme>
 
-  // 主内容区
-  content: JSX.Element,
+  // 内容，可用 <Fragment> 传递
+  content: React.ReactNode
+  // 内容样式，已设"flex"、"overflow"
+  sxContent?: SxProps<Theme>
 
-  // 底部
-  footer?: JSX.Element,
+  // 底部，可用 <Fragment> 传递
+  footer?: React.ReactNode
+  // 底部样式，已设"flex"
+  sxFooter?: SxProps<Theme>
 
-  // 面板的样式
+  // 整个面板的样式，已设"height"
   sx?: SxProps<Theme>
+  // 头部下、底部上是否需要分隔符，默认为 true
+  dividers?: boolean
 }
 
 /**
  * 垂直布局的面板的参数
- * @param props 面板属性
  */
-const DoVPanel = (props: VPanelProps): JSX.Element => {
+const DoVPanel = ({
+                    header,
+                    sxHeader,
+                    content,
+                    sxContent,
+                    footer,
+                    sxFooter,
+                    sx,
+                    dividers = true
+                  }: VPanelProps): JSX.Element => {
   return (
-    <Stack boxSizing={"border-box"}
-           borderLeft={"1px rgba(0, 0, 0, 0.08) solid"}
-           borderRight={"1px rgba(0, 0, 0, 0.08) solid"}
-           height={"100vh"}
-           bgcolor={"#FFF"}
-           sx={{...props.sx}}>
-      {/* 头部 */}
-      <Stack direction={"row"} flex={"0 1 auto"} justifyContent={"space-between"} alignItems={"center"}
-             padding={1}>
-        {/* 标题 */}
-        <Typography title={props.title} overflow={"hidden"} textOverflow={"ellipsis"}
-                    whiteSpace={"nowrap"}>{props.title}
-        </Typography>
-        {/* 工具按钮 */}
-        <Stack direction={"row"}>{props.slot}</Stack>
-      </Stack>
-      <Divider variant={"fullWidth"}/>
+    <Card sx={{height: "100vh", display: "flex", flexFlow: "column nowrap", ...sx}}>
+      <CardHeader {...header} sx={{
+        flex: "0 1 auto",
+        display: "flex", flexFlow: "row nowrap", alignItems: "center",
+        "& .MuiCardHeader-content": {overflow: "hidden"},
+        "& .MuiCardHeader-title": {overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"},
+        ...sxHeader
+      }}/>
 
-      {/* 内容 */}
-      <Box flex={"1 1 auto"} overflow={"auto"} marginTop={1}>{props.content}</Box>
+      {dividers && <Divider/>}
 
-      {/* 脚部 */}
-      <Box flex={"0 1 auto"} marginTop={1} marginBottom={1}>
-        {props.footer}
-      </Box>
-    </Stack>
+      <CardContent sx={{flex: "1 1 auto", overflow: "auto", ...sxContent}}>
+        {content}
+      </CardContent>
+
+      {dividers&&<Divider/>}
+
+      <CardActions sx={{flex: "0 1 auto", ...sxFooter}}>
+        {footer}
+      </CardActions>
+    </Card>
   )
 }
 
