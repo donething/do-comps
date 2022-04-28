@@ -54,8 +54,8 @@ export const DoListAddTest = () => {
         isNewAdded: true,
         extra: <Stack direction={"row"} alignItems={"center"}>
           <span>测试</span>
-          <Switch aria-labe={"开关1"}/>
-          <Switch aria-labe={"开关1"}/>
+          <Switch title={"开关1"}/>
+          <Switch title={"开关2"}/>
         </Stack>
       }])
     }

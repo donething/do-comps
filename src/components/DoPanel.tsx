@@ -3,7 +3,7 @@ import {Card, CardActions, CardContent, CardHeader, Divider, Theme,} from "@mui/
 import {SxProps} from "@mui/system"
 
 // 垂直布局的面板的参数
-export type VPanelProps = {
+export type DoPanelProps = {
   // 头部
   header?: {
     // 右侧的工具按钮
@@ -39,25 +39,25 @@ export type VPanelProps = {
 /**
  * 垂直布局的面板的参数
  */
-const DoVPanel = ({
-                    header,
-                    sxHeader,
-                    content,
-                    sxContent,
-                    footer,
-                    sxFooter,
-                    sx,
-                    dividers = true
-                  }: VPanelProps): JSX.Element => {
+const DoPanel = ({
+                   header,
+                   sxHeader,
+                   content,
+                   sxContent,
+                   footer,
+                   sxFooter,
+                   sx,
+                   dividers = true
+                 }: DoPanelProps): JSX.Element => {
   return (
     <Card sx={{height: "100vh", display: "flex", flexFlow: "column nowrap", ...sx}}>
       {header &&
         <Fragment>
           <CardHeader {...header} sx={{
             flex: "0 1 auto",
-            display: "flex", flexFlow: "row nowrap", alignItems: "center",
             "& .MuiCardHeader-content": {overflow: "hidden"},
             "& .MuiCardHeader-title": {overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"},
+            display: "flex", flexFlow: "row nowrap", alignItems: "center",
             ...sxHeader
           }}/>
 
@@ -65,21 +65,21 @@ const DoVPanel = ({
         </Fragment>
       }
 
-      <CardContent sx={{flex: "1 1 auto", overflow: "auto", ...sxContent}}>
-        {content}
+      <CardContent sx={{
+        flex: "1 1 auto", overflow: "auto",
+        display: "flex", flexFlow: "column nowrap", ...sxContent
+      }}>{content}
       </CardContent>
 
       {footer &&
         <Fragment>
           {dividers && <Divider/>}
 
-          <CardActions sx={{flex: "0 1 auto", ...sxFooter}}>
-            {footer}
-          </CardActions>
+          <CardActions sx={{flex: "0 1 auto", ...sxFooter}}>{footer}</CardActions>
         </Fragment>
       }
     </Card>
   )
 }
 
-export default DoVPanel
+export default DoPanel

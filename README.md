@@ -255,18 +255,20 @@ export const DoTextFieldBtnTest = () => {
 }
 ```
 
-### DoVPanel
+### DoPanel
 
-组件：固定高度为窗口高度的 3 层垂直面板，中间内容区可滚动
+组件：默认固定高度为窗口高度，分 3 层的垂直面板，中间内容区可滚动
+
+可通过指定属性`sxContent`：{flexFlow: "row"}，转为水平布局的面板
 
 ```jsx
-import {DoVPanel} from "../main"
+import {DoPanel} from "../main"
 import {Button} from "@mui/material"
 
 export const DoVpanelTest = () => {
   const v = Array.from(Array(100).keys()).map(item => <li key={item}>{item}</li>)
   return (
-    <DoVPanel title={"垂直面板垂直面板垂直面板垂直面板"}
+    <DoPanel title={"垂直面板垂直面板垂直面板垂直面板"}
               slot={<Button onClick={() => alert("按钮！")}>按钮</Button>}
               content={<ul>{v}</ul>}
               footer={<span>底部</span>}

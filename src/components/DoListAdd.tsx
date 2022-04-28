@@ -1,6 +1,6 @@
 import React from "react"
 import {Avatar, Box, ListItem, ListItemAvatar, ListItemText, SxProps, Theme} from "@mui/material"
-import {DoOptionsInput, DoOptionsInputProps, DoVPanel} from "../main"
+import {DoOptionsInput, DoOptionsInputProps, DoPanel} from "../main"
 import {alpha} from '@mui/material/styles'
 
 // 列表项的参数
@@ -82,7 +82,7 @@ export type DoListAddProps = {
  */
 const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
-    <DoVPanel sx={props.sx} header={{title: props.title, action: props.slot}} content={
+    <DoPanel sx={props.sx} header={{title: props.title, action: props.slot}} content={
       <Box component={"ul"}>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </Box>

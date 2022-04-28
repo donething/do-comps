@@ -1,15 +1,15 @@
 import DoSvgIcon, {DoSvgIconProps} from "./components/DoSvgIcon"
-import DoSnackbar, {useSharedSnackbar, BrightAlert, DoSnackbarProps} from "./components/DoSnackbar"
-import DoDialog, {useSharedDialog, DoDialogProps, DoDialogBtnProps} from "./components/DoDialog"
-import DoVPanel, {VPanelProps} from "./components/DoVPanel"
+import DoSnackbar, {BrightAlert, DoSnackbarProps, useSharedSnackbar} from "./components/DoSnackbar"
+import DoDialog, {DoDialogBtnProps, DoDialogProps, useSharedDialog} from "./components/DoDialog"
+import DoPanel, {DoPanelProps} from "./components/DoPanel"
 import DoTextFieldBtn, {DoTextFieldBtnType} from "./components/DoTextFieldBtn"
-import DoOptionsInput, {OptionsListType, DoOptionsInputProps} from "./components/DoOptionsInput"
+import DoOptionsInput, {DoOptionsInputProps, OptionsListType} from "./components/DoOptionsInput"
 import DoListAdd, {DoListAddProps, DoLItemProps} from "./components/DoListAdd"
 import {delRevoke, delRevokeArray} from "./components/DoDelRevoke"
 import DoBackupPanel, {
+  DoBackupPanelBaseProps,
   DoBackupPanelChromium,
-  DoBackupPanelProps,
-  DoBackupPanelBaseProps
+  DoBackupPanelProps
 } from "./components/DoBackupPanel"
 
 export {DoBackupPanel, DoBackupPanelChromium}
@@ -35,5 +35,5 @@ export type {DoSvgIconProps}
 export {DoTextFieldBtn}
 export type {DoTextFieldBtnType}
 
-export {DoVPanel}
-export type {VPanelProps}
+export {DoPanel}
+export type {DoPanelProps}
