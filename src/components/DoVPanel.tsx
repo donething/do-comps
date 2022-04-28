@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Fragment} from "react"
 import {Card, CardActions, CardContent, CardHeader, Divider, Theme,} from "@mui/material"
 import {SxProps} from "@mui/system"
 
@@ -51,25 +51,33 @@ const DoVPanel = ({
                   }: VPanelProps): JSX.Element => {
   return (
     <Card sx={{height: "100vh", display: "flex", flexFlow: "column nowrap", ...sx}}>
-      <CardHeader {...header} sx={{
-        flex: "0 1 auto",
-        display: "flex", flexFlow: "row nowrap", alignItems: "center",
-        "& .MuiCardHeader-content": {overflow: "hidden"},
-        "& .MuiCardHeader-title": {overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"},
-        ...sxHeader
-      }}/>
+      {header &&
+        <Fragment>
+          <CardHeader {...header} sx={{
+            flex: "0 1 auto",
+            display: "flex", flexFlow: "row nowrap", alignItems: "center",
+            "& .MuiCardHeader-content": {overflow: "hidden"},
+            "& .MuiCardHeader-title": {overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"},
+            ...sxHeader
+          }}/>
 
-      {dividers && <Divider/>}
+          {dividers && <Divider/>}
+        </Fragment>
+      }
 
       <CardContent sx={{flex: "1 1 auto", overflow: "auto", ...sxContent}}>
         {content}
       </CardContent>
 
-      {dividers&&<Divider/>}
+      {footer &&
+        <Fragment>
+          {dividers && <Divider/>}
 
-      <CardActions sx={{flex: "0 1 auto", ...sxFooter}}>
-        {footer}
-      </CardActions>
+          <CardActions sx={{flex: "0 1 auto", ...sxFooter}}>
+            {footer}
+          </CardActions>
+        </Fragment>
+      }
     </Card>
   )
 }
