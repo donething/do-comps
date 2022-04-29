@@ -6,6 +6,6 @@ export const DoVpanelTest = () => {
   return (
     <DoPanel sx={{width: 300}} header={{
       title: "垂直面板垂直面板垂直面板垂直面板", action: <Button onClick={() => alert("按钮！")}>按钮</Button>
-    }} content={<ul>{v}</ul>} footer={<span>底部</span>}/>
+    }} content={v} footer={<span>底部</span>}/>
   )
 }

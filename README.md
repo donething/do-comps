@@ -259,7 +259,7 @@ export const DoTextFieldBtnTest = () => {
 
 组件：默认固定高度为窗口高度，分 3 层的垂直面板，中间内容区可滚动
 
-可通过指定属性`sxContent={{flexFlow: "row wrap", alignItems: "flex-start", gap: 2}`，转为水平布局的面板
+可通过指定属性`isRow`，转为水平布局的面板
 
 ```jsx
 import {DoPanel} from "../main"

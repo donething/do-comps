@@ -34,6 +34,8 @@ export type DoPanelProps = {
   sx?: SxProps<Theme>
   // 头部下、底部上是否需要分隔符，默认为 true
   dividers?: boolean
+  // 是否为水平布局，默认 false，即垂直布局
+  isRow?: boolean
 }
 
 /**
@@ -47,7 +49,8 @@ const DoPanel = ({
                    footer,
                    sxFooter,
                    sx,
-                   dividers = true
+                   dividers = true,
+                   isRow = false
                  }: DoPanelProps): JSX.Element => {
   return (
     <Card sx={{height: "100vh", display: "flex", flexFlow: "column nowrap", ...sx}}>
@@ -67,7 +70,10 @@ const DoPanel = ({
 
       <CardContent sx={{
         flex: "1 1 auto", overflow: "auto",
-        display: "flex", flexFlow: "column nowrap", ...sxContent
+        display: "flex", flexFlow: isRow ? "row wrap" : "column nowrap",
+        alignItems: isRow ? "flex-start" : "stretch",
+        gap: isRow ? 2 : 0,
+        ...sxContent
       }}>{content}
       </CardContent>
 
