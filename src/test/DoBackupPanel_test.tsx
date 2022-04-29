@@ -5,7 +5,7 @@ export const DoBackupPanelTest = () => {
   return (
     <Stack>
       <DoBackupPanel title={"配置"} filename={"data.json"} onClear={() => {
-      }} onRead={() => ({})} onRestore={() => {
+      }} onRead={async () => ({a: 123, b: "test."})} onRestore={() => {
       }}/>
 
       {/*<DoBackupPanelChromium/>*/}

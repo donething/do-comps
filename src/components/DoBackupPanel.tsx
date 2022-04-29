@@ -23,7 +23,8 @@ export type DoBackupPanelProps = DoBackupPanelBaseProps & {
   onClear: () => void
 
   // 保存存储到本地
-  onRead: () => object
+  // 注意函数需要修饰为 async，以返回 Promise 数据
+  onRead: () => Promise<object>
 
   // 恢复，可用 async 将异步函数同步执行
   onRestore: (obj: object) => void
@@ -115,7 +116,7 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
         {/*  保存配置到本地 */}
         <Button variant="outlined" startIcon={<FileDownloadOutlinedIcon/>} onClick={async _ => {
           // 下载
-          download(props.onRead(), props.filename || `${Date.now()}.json`)
+          download(await props.onRead(), props.filename || `${Date.now()}.json`)
           console.log("已保存配置到下载目录")
         }}>下载配置</Button>
       </CardContent>
