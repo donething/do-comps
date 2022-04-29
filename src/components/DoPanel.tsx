@@ -73,6 +73,7 @@ const DoPanel = ({
         display: "flex", flexFlow: isRow ? "row wrap" : "column nowrap",
         alignItems: isRow ? "flex-start" : "stretch",
         gap: isRow ? 2 : 0,
+        padding: 0,
         ...sxContent
       }}>{content}
       </CardContent>
