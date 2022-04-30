@@ -21,28 +21,33 @@ const DoTextFieldBtn = (props: DoTextFieldBtnType): JSX.Element => {
   const {enterNode, onEnter, ...ps} = props
 
   return (
-    <TextField{...ps} value={value} fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Box onClick={() => onEnter && onEnter(value)}>
-                      {
-                        typeof enterNode === "string" ?
-                          <Button variant={"contained"} disableElevation>{enterNode}</Button> :
-                          enterNode
-                      }
-                    </Box>
-                  </InputAdornment>
-                ),
-                style: {paddingRight: 0}
-              }}
-              onChange={event => setValue(event.target.value)}
-              onKeyDown={event => {
-                if (event.key === "Enter") {
-                  onEnter && onEnter(value)
-                  event.preventDefault()
-                }
-              }}
+    <TextField fullWidth {...ps} value={value} onChange={event => setValue(event.target.value)}
+               InputProps={{
+                 /* 确定按钮 */
+                 endAdornment: (
+                   <InputAdornment position="end">
+                     <Box onClick={() => {
+                       onEnter && onEnter(value)
+                       setValue("")
+                     }}>
+                       {
+                         typeof enterNode === "string" ?
+                           <Button variant={"contained"} disableElevation>{enterNode}</Button> :
+                           enterNode
+                       }
+                     </Box>
+                   </InputAdornment>
+                 ),
+                 style: {paddingRight: 0}
+               }}
+               onKeyDown={event => {
+                 /* 回车键 */
+                 if (event.key === "Enter") {
+                   onEnter && onEnter(value)
+                   setValue("")
+                   event.preventDefault()
+                 }
+               }}
     />
   )
 }
