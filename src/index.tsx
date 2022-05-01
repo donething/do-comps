@@ -11,6 +11,7 @@ import {DoListAddTest} from "./test/DoListAdd_test"
 import {DoBackupPanelTest} from "./test/DoBackupPanel_test"
 import {DoDialog, DoSnackbar} from "./main"
 import {DoDelRevokeTest} from "./test/DoDelRevoke_test"
+import {DoTextTest} from "./test/DoText_test"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,7 @@ ReactDOM.render(
         <Route path="/DoListAdd" element={<DoListAddTest/>}/>
         <Route path="/DoBackupPanel" element={<DoBackupPanelTest/>}/>
         <Route path="/DoDelRevoke" element={<DoDelRevokeTest/>}/>
+        <Route path="/DoText" element={<DoTextTest/>}/>
       </Routes>
     </HashRouter>
   </React.StrictMode>,

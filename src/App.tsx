@@ -12,6 +12,7 @@ function App() {
       <Link to={"DoListAdd"}><Button size={"large"}>DoListAdd</Button></Link>
       <Link to={"DoBackupPanel"}><Button size={"large"}>DoBackupPanel</Button></Link>
       <Link to={"DoDelRevoke"}><Button size={"large"}>DoDelRevoke</Button></Link>
+      <Link to={"DoText"}><Button size={"large"}>DoText</Button></Link>
     </Stack>
   )
 }
