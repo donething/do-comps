@@ -1,11 +1,12 @@
-import {DoPanel} from "../main"
-import {Button} from "@mui/material"
+import {DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader} from "../main"
 
 export const DoVpanelTest = () => {
   const v = Array.from(Array(100).keys()).map(item => <li key={item}>{item}</li>)
   return (
-    <DoPanel sx={{width: 300}} header={{
-      title: "垂直面板垂直面板垂直面板垂直面板", action: <Button onClick={() => alert("按钮！")}>按钮</Button>
-    }} content={v} footer={<span>底部</span>}/>
+    <DoPanel>
+      <DoPanelHeader divider={true}>标题</DoPanelHeader>
+      <DoPanelContent>{v}</DoPanelContent>
+      <DoPanelFooter divider={true}>底部</DoPanelFooter>
+    </DoPanel>
   )
 }

@@ -1,7 +1,7 @@
 import DoSvgIcon, {DoSvgIconProps} from "./components/DoSvgIcon"
 import DoSnackbar, {BrightAlert, DoSnackbarProps, useSharedSnackbar} from "./components/DoSnackbar"
 import DoDialog, {DoDialogBtnProps, DoDialogProps, useSharedDialog} from "./components/DoDialog"
-import DoPanel, {DoPanelProps} from "./components/DoPanel"
+import {DoPanel, DoPanelHeader, DoPanelContent, DoPanelFooter} from "./components/DoPanel"
 import DoTextFieldBtn, {DoTextFieldBtnType} from "./components/DoTextFieldBtn"
 import DoOptionsInput, {DoOptionsInputProps, OptionsListType} from "./components/DoOptionsInput"
 import DoListAdd, {DoListAddProps, DoLItemProps} from "./components/DoListAdd"
@@ -39,5 +39,4 @@ export type {DoTextProps}
 export {DoTextFieldBtn}
 export type {DoTextFieldBtnType}
 
-export {DoPanel}
-export type {DoPanelProps}
+export {DoPanel, DoPanelHeader, DoPanelContent, DoPanelFooter}

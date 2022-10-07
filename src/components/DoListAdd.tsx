@@ -1,6 +1,6 @@
 import React from "react"
-import {Avatar, Box, ListItem, ListItemAvatar, ListItemText, SxProps, Theme} from "@mui/material"
-import {DoOptionsInput, DoOptionsInputProps, DoPanel} from "../main"
+import {Avatar, ListItem, ListItemAvatar, ListItemText, Stack, SxProps, Theme, Typography} from "@mui/material"
+import {DoOptionsInput, DoOptionsInputProps, DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader} from "../main"
 import {alpha} from '@mui/material/styles'
 
 // 列表项的参数
@@ -82,12 +82,20 @@ export type DoListAddProps = {
  */
 const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
-    <DoPanel sx={props.sx} header={{title: props.title, action: props.slot}} content={
-      <Box component={"ul"}>
+    <DoPanel sx={props.sx}>
+      <DoPanelHeader>
+        <Stack flexDirection={"row"} flexWrap={"nowrap"} justifyContent={"space-between"} alignItems={"center"}>
+          <Typography padding={1} fontSize={"larger"} fontWeight={"normal"}>{props.title}</Typography>
+          {props.slot}
+        </Stack>
+      </DoPanelHeader>
+
+      <DoPanelContent ps={{component: "ul", display: "flex", flexDirection: "column", overflow: "auto"}}>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
-      </Box>
-    } footer={props.inputProps ? (<DoOptionsInput {...props.inputProps}/>) : undefined}
-    />
+      </DoPanelContent>
+
+      <DoPanelFooter>{props.inputProps ? (<DoOptionsInput {...props.inputProps}/>) : undefined}</DoPanelFooter>
+    </DoPanel>
   )
 }
 

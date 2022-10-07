@@ -1,6 +1,6 @@
 import {DoListAdd, DoLItemProps, DoOptionsInputProps} from "../main"
 import {useEffect, useState} from "react"
-import {Stack, Switch} from "@mui/material"
+import {Button, Stack, Switch} from "@mui/material"
 
 export const DoListAddTest = () => {
   const [list, setList] = useState<Array<DoLItemProps>>([])
@@ -64,6 +64,6 @@ export const DoListAddTest = () => {
   }, [])
 
   return (
-    <DoListAdd sx={{width: 500}} title={"列表"} list={list} inputProps={input}/>
+    <DoListAdd sx={{width: 500}} title={"列表"} slot={<Button>测试按钮</Button>} list={list} inputProps={input}/>
   )
 }

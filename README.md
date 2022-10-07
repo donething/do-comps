@@ -1,6 +1,6 @@
 # do-comps
 
-使用`yarn build`编译完成后，需要删除`dist/types`文件夹
+使用`yarn build`编译完成后，需要**删除**`dist/types`文件夹
 
 ## 已编写组件
 
@@ -262,18 +262,33 @@ export const DoTextFieldBtnTest = () => {
 可通过指定属性`isRow`，转为水平布局的面板
 
 ```jsx
-import {DoPanel} from "../main"
-import {Button} from "@mui/material"
+import {DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader} from "../main"
 
 export const DoVpanelTest = () => {
   const v = Array.from(Array(100).keys()).map(item => <li key={item}>{item}</li>)
   return (
-    <DoPanel title={"垂直面板垂直面板垂直面板垂直面板"}
-              slot={<Button onClick={() => alert("按钮！")}>按钮</Button>}
-              content={<ul>{v}</ul>}
-              footer={<span>底部</span>}
-              sx={{width: 250}}
-    />
+    <DoPanel>
+      <DoPanelHeader divider={true}>标题</DoPanelHeader>
+      <DoPanelContent>{v}</DoPanelContent>
+      <DoPanelFooter divider={true}>底部</DoPanelFooter>
+    </DoPanel>
+  )
+}
+```
+
+### DoText
+
+组件：可设置行数的文本组件
+
+```jsx
+import DoText from "../components/DoText"
+import {Stack} from "@mui/material"
+
+export const DoTextTest = () => {
+  return (
+    <Stack spacing={3}>
+      <DoText sx={{color: "green", borderBottom: 1}} lines={2}>是的，它是一个比率</DoText>
+    </Stack>
   )
 }
 ```

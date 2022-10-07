@@ -9,15 +9,16 @@ export type DoTextProps = TypographyProps & {
   // 最大行数，不指定时不限制
   lines?: number
 
-  // 文本行数是否为最大行数
-  isMax?: boolean
+  // 行高，单位 em，默认为 1.8
+  lineHeight?: number
 }
 
-// 文本组件，可传递`Typography`的属性
+// 文本组件，可指定行数，多余的部分文本会省略。
+// 可传递`Typography`的属性
 // @see https://stackoverflow.com/questions/63592567/material-ui-text-ellipsis-after-two-line
 const DoText = (props: DoTextProps): JSX.Element => {
   // 单独提取 sx，以免被覆盖
-  const {sx, lines, isMax, ...others} = props
+  const {sx, lines, lineHeight, ...others} = props
 
   return (
     <Typography {...others} sx={{
@@ -25,8 +26,8 @@ const DoText = (props: DoTextProps): JSX.Element => {
       textOverflow: "ellipsis",
       display: "-webkit-box",
       WebkitLineClamp: lines,
-      lineHeight: "1.5em",
-      height: `${lines ? (lines * 1.5) + "em" : "auto"}`,
+      lineHeight: `${lineHeight ? lineHeight : 1.8}em`,
+      height: `${lines ? (lines * (lineHeight ? lineHeight : 1.8)) + "em" : "auto"}`,
       WebkitBoxOrient: "vertical",
       ...sx
     }}>{props.children}
