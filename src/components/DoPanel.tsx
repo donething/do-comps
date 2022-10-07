@@ -48,7 +48,8 @@ const DoPanelFooter = (props: { children: React.ReactNode, divider?: boolean, ps
  */
 const DoPanel = (props: { children: React.ReactNode, sx?: SxProps<Theme> }): JSX.Element => {
   return (
-    <Box sx={props.sx} display={"flex"} flexDirection={"column"} flexWrap={"nowrap"} height={"100vh"}>
+    <Box bgcolor={"background.paper"} sx={props.sx} display={"flex"} flexDirection={"column"} flexWrap={"nowrap"}
+         height={"100vh"}>
       {props.children}
     </Box>
   )
