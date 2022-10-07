@@ -84,13 +84,11 @@ const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
     <DoPanel sx={props.sx}>
       <DoPanelHeader>
-        <Stack flexDirection={"row"} flexWrap={"nowrap"} justifyContent={"space-between"} alignItems={"center"}>
-          <Typography padding={1} fontSize={"larger"} fontWeight={"normal"}>{props.title}</Typography>
-          {props.slot}
-        </Stack>
+        <Typography padding={1} fontSize={"larger"} fontWeight={"normal"}>{props.title}</Typography>
+        {props.slot}
       </DoPanelHeader>
 
-      <DoPanelContent ps={{component: "ul", display: "flex", flexDirection: "column", overflow: "auto"}}>
+      <DoPanelContent ps={{component: "ul"}}>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </DoPanelContent>
 
