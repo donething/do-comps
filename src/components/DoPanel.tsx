@@ -1,6 +1,7 @@
 import React from "react"
 import {Box, BoxProps, Divider, Stack, Theme} from "@mui/material"
 import {SxProps} from "@mui/system"
+import type {Property} from 'csstype'
 
 /**
  * 面板头部
@@ -9,7 +10,7 @@ import {SxProps} from "@mui/system"
  */
 const DoPanelHeader = (props: { children: React.ReactNode, divider?: boolean, ps?: BoxProps }) => {
   return (
-    <Box {...props.ps} flex={"0 1 auto"}>
+    <Box flex={"0 1 auto"} {...props.ps}>
       <Stack flexDirection={"row"} flexWrap={"nowrap"} justifyContent={"space-between"} alignItems={"center"}>
         {props.children}
       </Stack>
@@ -24,10 +25,16 @@ const DoPanelHeader = (props: { children: React.ReactNode, divider?: boolean, ps
  *
  * 默认方向为“列”
  */
-const DoPanelContent = (props: { children: React.ReactNode, direction?: "column" | "row", ps?: BoxProps }) => {
+const DoPanelContent = (props: {
+  children: React.ReactNode,
+  direction?: Property.FlexDirection,
+  wrap?: Property.FlexWrap,
+  ps?: BoxProps
+}) => {
   return (
-    <Box {...props.ps} flex={"1 1 auto"} display={"flex"} flexDirection={props.direction || "column"}
-         overflow={"auto"}>{props.children}</Box>
+    <Box flex={"1 1 auto"} display={"flex"} flexDirection={props.direction || "column"}
+         flexWrap={props.wrap || "wrap"} alignItems={"flex-start"} alignContent={"flex-start"}
+         overflow={"auto"}  {...props.ps} >{props.children}</Box>
   )
 }
 
@@ -36,7 +43,7 @@ const DoPanelContent = (props: { children: React.ReactNode, direction?: "column"
  */
 const DoPanelFooter = (props: { children: React.ReactNode, divider?: boolean, ps?: BoxProps }) => {
   return (
-    <Box paddingTop={1} {...props.ps} flex={"0 1 auto"}>
+    <Box paddingTop={1} flex={"0 1 auto"} {...props.ps}>
       {props.divider && <Divider/>}
       {props.children}
     </Box>
