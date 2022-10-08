@@ -5,7 +5,7 @@ export const DoVpanelTest = () => {
   return (
     <DoPanel>
       <DoPanelHeader divider={true}>标题</DoPanelHeader>
-      <DoPanelContent>{v}</DoPanelContent>
+      <DoPanelContent alignContent={"space-between"}>{v}</DoPanelContent>
       <DoPanelFooter divider={true}>底部</DoPanelFooter>
     </DoPanel>
   )

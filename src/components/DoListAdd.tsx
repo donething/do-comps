@@ -88,7 +88,7 @@ const DoListAdd = (props: DoListAddProps): JSX.Element => {
         {props.slot}
       </DoPanelHeader>
 
-      <DoPanelContent ps={{component: "ul"}}>
+      <DoPanelContent component={"ul"}>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </DoPanelContent>
 

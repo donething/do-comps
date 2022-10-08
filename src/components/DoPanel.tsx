@@ -1,7 +1,6 @@
 import React from "react"
 import {Box, BoxProps, Divider, Stack, Theme} from "@mui/material"
 import {SxProps} from "@mui/system"
-import type {Property} from 'csstype'
 
 /**
  * 面板头部
@@ -25,16 +24,13 @@ const DoPanelHeader = (props: { children: React.ReactNode, divider?: boolean, ps
  *
  * 默认方向为“列”
  */
-const DoPanelContent = (props: {
-  children: React.ReactNode,
-  direction?: Property.FlexDirection,
-  wrap?: Property.FlexWrap,
-  ps?: BoxProps
-}) => {
+const DoPanelContent = (props: BoxProps & { children: React.ReactNode }) => {
+  const {children, ...ps} = props
+
   return (
-    <Box flex={"1 1 auto"} display={"flex"} flexDirection={props.direction || "column"}
-         flexWrap={props.wrap || "wrap"} alignItems={"flex-start"} alignContent={"flex-start"}
-         overflow={"auto"}  {...props.ps} >{props.children}</Box>
+    <Box flex={"1 1 auto"} display={"flex"} flexDirection={"column"}
+         flexWrap={"wrap"} alignItems={"flex-start"} alignContent={"flex-start"}
+         overflow={"auto"}  {...ps} >{children}</Box>
   )
 }
 
