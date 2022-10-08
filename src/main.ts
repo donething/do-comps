@@ -11,7 +11,7 @@ import DoBackupPanel, {
   DoBackupPanelChromium,
   DoBackupPanelProps
 } from "./components/DoBackupPanel"
-import DoText, {DoTextProps} from "./components/DoText"
+import {DoText, DoTextTitle, DoTextProps} from "./components/DoText"
 
 export {DoBackupPanel, DoBackupPanelChromium}
 export type {DoBackupPanelProps, DoBackupPanelBaseProps}
@@ -33,7 +33,7 @@ export type {DoSnackbarProps}
 export {DoSvgIcon}
 export type {DoSvgIconProps}
 
-export {DoText}
+export {DoText, DoTextTitle}
 export type {DoTextProps}
 
 export {DoTextFieldBtn}

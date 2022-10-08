@@ -5,12 +5,8 @@ import React from "react"
 export type DoTextProps = TypographyProps & {
   // 文本，可作为子元素传递：<DoText>测试文本</DoText>
   children: string
-
   // 最大行数，不指定时不限制
   lines?: number
-
-  // 行高，单位 em，默认为 1.8
-  lineHeight?: number
 }
 
 // 文本组件，可指定行数，多余的部分文本会省略。
@@ -18,21 +14,22 @@ export type DoTextProps = TypographyProps & {
 // @see https://stackoverflow.com/questions/63592567/material-ui-text-ellipsis-after-two-line
 const DoText = (props: DoTextProps): JSX.Element => {
   // 单独提取 sx，以免被覆盖
-  const {sx, lines, lineHeight, ...others} = props
+  const {children, lines, ...ps} = props
 
   return (
-    <Typography {...others} sx={{
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      display: "-webkit-box",
-      WebkitLineClamp: lines,
-      lineHeight: `${lineHeight ? lineHeight : 1.8}em`,
-      height: `${lines ? (lines * (lineHeight ? lineHeight : 1.8)) + "em" : "auto"}`,
-      WebkitBoxOrient: "vertical",
-      ...sx
-    }}>{props.children}
+    <Typography overflow={"hidden"} {...ps}
+                sx={{display: "-webkit-box", WebkitLineClamp: lines, WebkitBoxOrient: "vertical"}}>
+      {props.children}
     </Typography>
   )
 }
 
-export default DoText
+// 返回标题组件
+const DoTextTitle = (props: TypographyProps & { children: string }) => {
+  const {children, ...ps} = props
+  return (
+    <DoText padding={1} paddingLeft={2} fontWeight={400} fontSize={"1.2rem"} {...ps}>{children}</DoText>
+  )
+}
+
+export {DoText, DoTextTitle}

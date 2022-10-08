@@ -1,6 +1,14 @@
 import React from "react"
 import {Avatar, ListItem, ListItemAvatar, ListItemText, Stack, SxProps, Theme, Typography} from "@mui/material"
-import {DoOptionsInput, DoOptionsInputProps, DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader} from "../main"
+import {
+  DoOptionsInput,
+  DoOptionsInputProps,
+  DoPanel,
+  DoPanelContent,
+  DoPanelFooter,
+  DoPanelHeader,
+  DoTextTitle
+} from "../main"
 import {alpha} from '@mui/material/styles'
 
 // 列表项的参数
@@ -84,11 +92,11 @@ const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
     <DoPanel sx={props.sx}>
       <DoPanelHeader>
-        <Typography padding={1} fontSize={"larger"} fontWeight={"normal"}>{props.title}</Typography>
+        <DoTextTitle>{props.title}</DoTextTitle>
         {props.slot}
       </DoPanelHeader>
 
-      <DoPanelContent component={"ul"}>
+      <DoPanelContent>
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </DoPanelContent>
 
