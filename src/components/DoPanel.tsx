@@ -39,7 +39,7 @@ const DoPanelFooter = (props: StackProps & { children: React.ReactNode }) => {
   const {children, ...ps} = props
 
   return (
-    <Stack flex={"0 1 auto"} paddingTop={1} {...ps}>
+    <Stack flex={"0 1 auto"} paddingTop={2} {...ps}>
       {children}
     </Stack>
   )

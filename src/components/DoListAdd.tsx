@@ -1,5 +1,5 @@
 import React from "react"
-import {Avatar, ListItem, ListItemAvatar, ListItemText, Stack, SxProps, Theme, Typography} from "@mui/material"
+import {Avatar, Divider, ListItem, ListItemAvatar, ListItemText, Stack, SxProps, Theme, Typography} from "@mui/material"
 import {
   DoOptionsInput,
   DoOptionsInputProps,
@@ -90,7 +90,7 @@ export type DoListAddProps = {
  */
 const DoListAdd = (props: DoListAddProps): JSX.Element => {
   return (
-    <DoPanel sx={props.sx}>
+    <DoPanel sx={props.sx} divider={<Divider/>}>
       <DoPanelHeader>
         <DoTextTitle>{props.title}</DoTextTitle>
         {props.slot}
