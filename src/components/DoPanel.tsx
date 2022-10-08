@@ -7,14 +7,16 @@ import {SxProps} from "@mui/system"
  *
  * 包含标题文字、工具按钮集，将两端对齐
  */
-const DoPanelHeader = (props: { children: React.ReactNode, divider?: boolean, ps?: BoxProps }) => {
+const DoPanelHeader = (props: BoxProps & { children: React.ReactNode, divider?: boolean }) => {
+  const {children, divider, ...ps} = props
+
   return (
-    <Box flex={"0 1 auto"} {...props.ps}>
+    <Box flex={"0 1 auto"} {...ps}>
       <Stack flexDirection={"row"} flexWrap={"nowrap"} justifyContent={"space-between"} alignItems={"center"}>
-        {props.children}
+        {children}
       </Stack>
 
-      {props.divider && <Divider/>}
+      {divider && <Divider/>}
     </Box>
   )
 }
@@ -37,11 +39,13 @@ const DoPanelContent = (props: BoxProps & { children: React.ReactNode }) => {
 /**
  * 面板底部
  */
-const DoPanelFooter = (props: { children: React.ReactNode, divider?: boolean, ps?: BoxProps }) => {
+const DoPanelFooter = (props: BoxProps & { children: React.ReactNode, divider?: boolean }) => {
+  const {children, divider, ...ps} = props
+
   return (
-    <Box paddingTop={1} flex={"0 1 auto"} {...props.ps}>
-      {props.divider && <Divider/>}
-      {props.children}
+    <Box paddingTop={1} flex={"0 1 auto"} {...ps}>
+      {divider && <Divider/>}
+      {children}
     </Box>
   )
 }
