@@ -28,6 +28,7 @@ export const delRevoke = function <T>(title: string | number,
     open: true,
     autoHideDuration: 6000,
     message: `是否撤销删除 "${title}"`,
+    showCloseBn: true,
     action: <Button variant={"text"} color={"primary"} onClick={() => {
       revoke(JSON.parse(deledData))
       console.log(`已恢复 "${title}"`)
@@ -95,6 +96,7 @@ export const delRevokeArray = <D, M = void>(title: string | number,
     open: true,
     autoHideDuration: 6000,
     message: `是否撤销删除 "${title}"`,
+    showCloseBn: true,
     action: <Button variant={"text"} color={"primary"} onClick={() => {
       // 恢复项目
       dataList.splice(iData, 0, deledDataList[0])

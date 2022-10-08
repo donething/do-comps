@@ -1,7 +1,18 @@
 import React, {useCallback} from "react"
-import {Alert, AlertColor, AlertProps, AlertTitle, Snackbar, SnackbarOrigin} from "@mui/material"
+import {
+  Alert,
+  AlertColor,
+  AlertProps,
+  AlertTitle,
+  Divider,
+  IconButton,
+  Snackbar,
+  SnackbarOrigin,
+  Stack
+} from "@mui/material"
 import MuiAlert from "@mui/material/Alert"
 import {useBetween} from "use-between"
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
 // 深色 Alert
 export const BrightAlert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -30,7 +41,11 @@ export type DoSnackbarProps = {
   // 行为，如撤销按钮
   action?: React.ReactNode
 
-  // 当为空时，不会显示关闭按钮，若 autoHideDuration 为空时需指定以便关闭
+  // 是否显示自定义的关闭按钮
+  showCloseBn?: boolean
+  // 当为空时，不会显示关闭按钮，不过 action 可以提供替代行为。
+  // 不过由于通过替代 action 实现的，将始终不出现默认的关闭按钮，即始终为此自定义的关闭按钮
+  // 若 autoHideDuration 为空时需指定以便关闭
   onClose?: () => void
 }
 
@@ -73,13 +88,20 @@ const DoSnackbar = () => {
                 // 用于关闭 Snackbar，如果没有该 onClose 回调，Snackbar 将无法关闭（即使指定了 autoHideDuration）
                 showSb({open: false})
               }}>
-      <Alert sx={{width: "100%"}} severity={sbProps.severity} action={sbProps.action}
-                   onClose={!sbProps.onClose ? undefined : () => {
-                     // 用于点击关闭按钮后回调，如果没有 onClose 属性，将不出现关闭按钮
-                     showSb({open: false})
-                     sbProps.onClose && sbProps.onClose()
-                   }}>
-        <AlertTitle>{sbProps.title}</AlertTitle>
+      <Alert sx={{width: "100%", alignItems: "center", "& .MuiAlert-action": {padding: "0 0 0 16px"}}}
+             severity={sbProps.severity}
+             action={<Stack direction={"row"} alignItems={"center"}>
+               {sbProps.action}
+
+               {sbProps.showCloseBn && <IconButton aria-label={"关闭"} onClick={() => showSb({open: false})}>
+                 <CloseOutlinedIcon/>
+               </IconButton>}
+             </Stack>}
+             onClose={!sbProps.onClose ? undefined : () => {
+               showSb({open: false})
+               sbProps.onClose && sbProps.onClose()
+             }}>
+        {sbProps.title && <AlertTitle>{sbProps.title}</AlertTitle>}
         {sbProps.message}
       </Alert>
     </Snackbar>

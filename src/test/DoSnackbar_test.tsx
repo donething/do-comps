@@ -27,7 +27,7 @@ export const DoSnackbarTest = () => {
       </Button>
 
       <Button onClick={() => showSb({
-        open: true, title: "", message: "消息3。", onClose: () => {
+        open: true, title: "", message: "消息3。", showCloseBn: true, onClose: () => {
         }
       })}>
         打开 Snakebar3
