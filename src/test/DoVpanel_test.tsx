@@ -6,7 +6,7 @@ export const DoVpanelTest = () => {
   return (
     <DoPanel divider={<Divider/>}>
       <DoPanelHeader divider={true}>标题</DoPanelHeader>
-      <DoPanelContent divider={<Divider/>}>{v}</DoPanelContent>
+      <DoPanelContent component={"ul"}>{v}</DoPanelContent>
       <DoPanelFooter divider={true}>底部</DoPanelFooter>
     </DoPanel>
   )
