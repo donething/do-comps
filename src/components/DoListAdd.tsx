@@ -1,5 +1,5 @@
 import React from "react"
-import {Avatar, Divider, ListItem, ListItemAvatar, ListItemText, Stack, SxProps, Theme, Typography} from "@mui/material"
+import {Avatar, Divider, ListItem, ListItemAvatar, ListItemText, SxProps, Theme} from "@mui/material"
 import {
   DoOptionsInput,
   DoOptionsInputProps,
