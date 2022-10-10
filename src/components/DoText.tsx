@@ -17,9 +17,9 @@ const DoText = (props: DoTextProps): JSX.Element => {
   const {children, lines, ...ps} = props
 
   return (
-    <Typography overflow={"hidden"} {...ps}
+    <Typography overflow={"hidden"} title={children} {...ps}
                 sx={{display: "-webkit-box", WebkitLineClamp: lines, WebkitBoxOrient: "vertical"}}>
-      {props.children}
+      {children}
     </Typography>
   )
 }
