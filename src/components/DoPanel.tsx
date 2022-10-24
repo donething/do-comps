@@ -26,8 +26,7 @@ const DoPanelContent = (props: BoxProps & StackProps & { children: React.ReactNo
   const {children, ...ps} = props
 
   return (
-    <Stack flex={"1 1 auto"} overflow={"auto"} alignItems={"flex-start"}
-           alignContent={"flex-start"} {...ps} >
+    <Stack flex={"1 1 auto"} overflow={"auto"} alignItems={"flex-start"} alignContent={"flex-start"} {...ps} >
       {children}
     </Stack>
   )
@@ -47,7 +46,7 @@ const DoPanelFooter = (props: BoxProps & StackProps & { children: React.ReactNod
 }
 
 /**
- * 垂直布局的面板的参数
+ * 面板，默认垂直布局
  */
 const DoPanel = (props: BoxProps & StackProps & { children: React.ReactNode }): JSX.Element => {
   const {children, ...ps} = props

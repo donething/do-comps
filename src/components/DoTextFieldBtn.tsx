@@ -1,18 +1,29 @@
 import React, {useState} from "react"
 import {Box, Button, InputAdornment, TextField, TextFieldProps} from "@mui/material"
 
-// 带确认按钮的输入框的属性
+/**
+ * 带确认按钮的输入框的属性
+ */
 export type DoTextFieldBtnType = TextFieldProps & {
-  // 确认按钮，可传递字符串如“确定”，图标可以为
-  // `import {ReactComponent as IconSVG} from "../test/icons/settings.svg"`
-  // `<IconButton aria-label="确定"><SvgIcon component={IconSVG} viewBox="0 0 1024 1024"/></IconButton>`
-  enterNode?: string | React.ReactNode
+  /**
+   * 确认按钮，可传递字符串和图标，如
+   *
+   * `import {ReactComponent as IconSVG} from "../test/icons/settings.svg"`
+   *
+   * `<IconButton aria-label="确定"><SvgIcon component={IconSVG} viewBox="0 0 1024 1024"/></IconButton>`
+   */
+  enterNode?: React.ReactNode
 
-  // 回车、确定后的回调
+  /**
+   * 回车、点击确定后的回调
+   * @param value 输入框中的文本
+   */
   onEnter?: (value: string) => void
 }
 
-// 带确认按钮的输入框
+/**
+ * 带确认按钮的输入框
+ */
 const DoTextFieldBtn = (props: DoTextFieldBtnType): JSX.Element => {
   // 输入框的值，用于按下确认按钮后，清除搜索框的值
   const [value, setValue] = useState("")

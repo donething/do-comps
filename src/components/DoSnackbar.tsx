@@ -4,7 +4,6 @@ import {
   AlertColor,
   AlertProps,
   AlertTitle,
-  Divider,
   IconButton,
   Snackbar,
   SnackbarOrigin,
@@ -14,7 +13,9 @@ import MuiAlert from "@mui/material/Alert"
 import {useBetween} from "use-between"
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 
-// 深色 Alert
+/**
+ * 深色 Alert
+ */
 export const BrightAlert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
   ref,
@@ -22,55 +23,86 @@ export const BrightAlert = React.forwardRef<HTMLDivElement, AlertProps>(function
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
-// 控制显示 Snackbar
+/**
+ * 控制显示 Snackbar 的属性
+ */
 export type DoSnackbarProps = {
   // Snackbar 的属性
+  /**
+   * 是否显示
+   */
   open?: boolean
-  // 指定时间后自动隐藏，毫秒
+  /**
+   * 指定时间后自动隐藏，单位毫秒
+   */
   autoHideDuration?: number
-  // 位置
+  /**
+   * 出现的位置
+   */
   anchorOrigin?: SnackbarOrigin
 
   // Alert 的属性
-  // 标题，可空
+  /**
+   * 标题
+   */
   title?: React.ReactNode
-  // 消息
+  /**
+   * 消息
+   */
   message?: React.ReactNode
-  // 状态
+  /**
+   * 场景，不同场景颜色不同
+   */
   severity?: AlertColor
-  // 行为，如撤销按钮
+  /**
+   * 行为按钮，如撤销按钮
+   */
   action?: React.ReactNode
-
-  // 是否显示自定义的关闭按钮
+  /**
+   * 是否显示自定义的关闭按钮
+   *
+   * 若 autoHideDuration 为空时需指定以便关闭
+   */
   showCloseBn?: boolean
-  // 当为空时，不会显示关闭按钮，不过 action 可以提供替代行为。
-  // 不过由于通过替代 action 实现的，将始终不出现默认的关闭按钮，即始终为此自定义的关闭按钮
-  // 若 autoHideDuration 为空时需指定以便关闭
+  /**
+   * 关闭组件时的回调
+   */
   onClose?: () => void
 }
 
 // 初始值
-const initProps: DoSnackbarProps = {autoHideDuration: 3000}
+const initProps: DoSnackbarProps = {
+  open: false,
+  autoHideDuration: 3000,
+  anchorOrigin: {horizontal: "left", vertical: "bottom"},
+  title: "",
+  message: "",
+  severity: "info",
+  action: undefined,
+  showCloseBn: false,
+  onClose: undefined
+}
 
 // Snackbar 需要展示的数据
 const useSnackbar = () => {
   const [sbProps, setSbProps] = React.useState<DoSnackbarProps>(initProps)
-  const showSb = useCallback((ps: DoSnackbarProps) => {
-    // 在关闭时，仅改变`open`属性，不改变其它属性，可以避免重新渲染时的残影
-    if (ps.open === false) {
-      setSbProps(prev => ({...prev, open: false}))
-    } else {
-      setSbProps({...initProps, ...ps})
-    }
-  }, [])
+
+  const showSb = useCallback((ps: DoSnackbarProps) =>
+    setSbProps({...initProps, ...ps}), [])
 
   return {sbProps, showSb}
 }
 
-// 共享 Snackbar 需要展示的数据
+/**
+ * 共享 Snackbar 需要展示的数据
+ */
 export const useSharedSnackbar = () => useBetween(useSnackbar)
 
-// 自定义 Snackbar 组件
+/**
+ * 自定义 Snackbar 组件
+ *
+ * 可展示不太重要的消息
+ */
 const DoSnackbar = () => {
   const {sbProps, showSb} = useSharedSnackbar()
 

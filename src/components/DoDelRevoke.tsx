@@ -1,10 +1,12 @@
-import {DoSnackbarProps} from "../main"
+import {DoSnackbarProps} from "./DoSnackbar"
 import {Button} from "@mui/material"
 import React from "react"
 
 /**
  * 删除项目，并提供撤销功能
- * 依赖 <DoSnackbar/> 组件，可在`index.tsx`全局引入
+ *
+ * **依赖** DoSnackbar 组件，可在`index.tsx`全局引入
+ *
  * @param title 已删除元素的标题，不需要完整提示，如 “弥珠(162345)”
  * @param data 包含被删数据的对象，用于撤销删除，如 chromium storage 中存储的对象
  * @param remove 删除组件绑定的状态，并保存
@@ -40,7 +42,9 @@ export const delRevoke = function <T>(title: string | number,
 
 /**
  * 删除数组中的项目，并提供撤销功能
- * 依赖 <DoSnackbar/> 组件，可在`index.tsx`全局引入
+ *
+ * **依赖** DoSnackbar 组件，可在`index.tsx`全局引入
+ *
  * @param title 已删除元素的标题，不需要完整提示，如 “弥珠(162345)”
  * @param showSb 控制 DoSnackbar ，显示撤销按钮
  * @param data 待删除的项目

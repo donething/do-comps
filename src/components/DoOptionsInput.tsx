@@ -1,18 +1,27 @@
 import React, {ReactNode, useState} from "react"
 import {FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material"
-import {DoTextFieldBtn} from "../main"
+import DoTextFieldBtn from "./DoTextFieldBtn"
 
-// 选择框的数据数组，每项对应一个选择框，常用的可放到数组前面
-//
-// label 为标签，options 为该输入框的数据：标题、值、提示，如：
-//
-// [ { label: "平台", options: [
-// {"title": "哔哩", "value": "bili", "tip": "主播的UID，不是房间号"},
-// {"title": "斗鱼", "value": "douyu", "tip": "斗鱼房间号"} ] },
-// { label: "地区", options: [ {"title": "国区", "value": "cn", "tip": "国区"},
-// {"title": "美区", "value": "us", "tip": "美区"} ] } ]
+/**
+ * 可为多个选择框的数据类型
+ *
+ * 每项对应一个选择框，常用的可放到数组前面
+ */
 export type OptionsListType = Array<{
+  /**
+   * 选择框的标签，如“平台”、“地区”，表示选项的类型
+   */
   label: string,
+  /**
+   * 选择框的数组，每项对应一个选择框
+   *
+   * 每项内的属性依次为：标题、值、悬浮时的提示。如
+   *
+   * `[ { label: "平台", options: [{"title": "哔哩", "value": "bili", "tip": "主播的UID，不是房间号"},`
+   * `{"title": "斗鱼", "value": "douyu", "tip": "斗鱼房间号"} ] },`
+   * `{ label: "地区", options: [ {"title": "国区", "value": "cn", "tip": "国区"},`
+   * `{"title": "美区", "value": "us", "tip": "美区"} ] } ]`
+   */
   options: Array<{ title: string, value: string, tip?: string }>
 }>
 
@@ -34,7 +43,9 @@ export type DoOptionsInputProps = {
   onEnter: (value: string, sList: Array<string>) => void
 }
 
-// 含前置选择框的输入框
+/**
+ * 含前置选择框的输入框
+ */
 const DoOptionsInput = function (props: DoOptionsInputProps): JSX.Element {
   // [多个]前置选择框被选择的值，该值将被在事件中传递到父组件
   const [sList, setSList] = useState<Array<string>>(props.optionsList.map(item => item.options[0].value))

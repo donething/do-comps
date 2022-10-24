@@ -1,38 +1,54 @@
 import {Button, Card, CardContent, CardHeader, CardProps, Divider} from "@mui/material"
-import {useSharedDialog, useSharedSnackbar} from "../main"
+import {useSharedDialog} from "./DoDialog"
+import {useSharedSnackbar} from "./DoSnackbar"
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import CenterFocusStrongOutlinedIcon from '@mui/icons-material/CenterFocusStrongOutlined'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
-import {download} from "do-utils/dist/elem"
 
-// 备份面板的基础属性
+/**
+ * 备份面板的基础属性
+ */
 export type DoBackupPanelBaseProps = {
-  // 标题
+  /**
+   * 标题
+   */
   title?: string
-
-  // 保存配置到本地时的文件名
+  /**
+   * 保存配置到本地时的文件名
+   */
   filename?: string
-
-  // Card 的属性
+  /**
+   * 面板整体的属性
+   */
   cardProps?: CardProps
 }
 
-// 备份面板的属性
+/**
+ * 备份面板的属性
+ */
 export type DoBackupPanelProps = DoBackupPanelBaseProps & {
-  // 清除存储
+  /**
+   * 清除数据的函数
+   */
   onClear: () => void
-
-  // 保存存储到本地
-  // 注意函数需要修饰为 async，以返回 Promise 数据
+  /**
+   * 读取数据的函数
+   *
+   * 注意函数需要修饰为 async，以返回 Promise 数据
+   */
   onRead: () => Promise<object>
-
-  // 恢复，可用 async 将异步函数同步执行
+  /**
+   * 恢复数据，可用 async 将异步函数同步执行
+   * @param obj
+   */
   onRestore: (obj: object) => void
 }
 
-// 备份、恢复数据面板
-//
-// 依赖 <DoSnackbar/>、<DoDialog/> 组件，可在`index.tsx`全局引入
+/**
+ * 备份、恢复数据面板
+ *
+ * **依赖** DoSnackbar、DoDialog 组件，提供消息提示，可在`index.tsx`全局引入
+ */
 const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
   const {showSb} = useSharedSnackbar()
   const {showDialog} = useSharedDialog()
@@ -124,9 +140,13 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
   )
 }
 
-// 备份、恢复 chromium storage 的数据面板
-//
-// 依赖 <DoSnackbar/>、<DoDialog/> 组件，可在`index.tsx`全局引入
+/**
+ * 备份、恢复 chromium storage 的数据面板
+ *
+ * 用于 chromium 扩展程序的数据备份和恢复
+ *
+ * **依赖** DoSnackbar、DoDialog 组件，可在`index.tsx`全局引入
+ */
 export const DoBackupPanelChromium = (props: DoBackupPanelBaseProps): JSX.Element => {
   return (
     <DoBackupPanel title={props.title || "Storage"}
@@ -157,6 +177,35 @@ export const DoBackupPanelChromium = (props: DoBackupPanelBaseProps): JSX.Elemen
                    }}
     />
   )
+}
+
+/**
+ * 保存数据到本地
+ * @param data 任意类型的数据
+ * @param filename 指定文件名
+ * @see https://juejin.cn/post/6844903699496566792
+ */
+const download = (data: any, filename: string) => {
+  switch (typeof data) {
+    // 如果是对象，先转为JSON字符串，再保存
+    case "object":
+      data = JSON.stringify(data)
+      // [data]表示将 data 转为数组
+      data = [data]
+      break
+    case "string":
+      // [data]表示将 data 转为数组
+      data = [data]
+      break
+  }
+
+  let blob = new Blob(data)
+  let a = document.createElement('a')
+  let url = window.URL.createObjectURL(blob)
+  a.href = url
+  a.download = filename
+  a.click()
+  setTimeout(() => window.URL.revokeObjectURL(url), 10)
 }
 
 export default DoBackupPanel

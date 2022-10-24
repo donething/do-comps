@@ -1,10 +1,18 @@
 # do-comps
 
-使用`yarn build`编译完成后，需要**删除**`dist/types`文件夹
+发布：使用`yarn build`编译完成后，需要**删除**`dist`文件夹下除了`main.*`以外的所有文件
+文件夹
 
-## 已编写组件
+使用：在其它工程引用本库时，`import`的来源应为`do-comps`，不可以含路径，如`do-comps/dist/main`。
 
-### DoBackupPanel、DoBackupPanelChromium
+正确的引用语句：
+```ts
+import {DoAutocomplete, useSharedBackdrop, DoList, useSharedSnackbar} from "do-comps"
+```
+
+# 已编写组件
+
+## DoBackupPanel、DoBackupPanelChromium
 
 组件：备份、恢复面板
 
@@ -27,7 +35,7 @@ export const DoBackupPanelTest = () => {
 }
 ```
 
-### delRevoke
+## delRevoke
 
 函数：删除、撤销
 
@@ -64,7 +72,35 @@ export const DoDelRevokeTest = () => {
 }
 ```
 
-### DoDialog
+## DoSnackbar
+
+组件：提示消息
+
+全局引用`<DoSnackbar/>`，再在需要的地方修改显示`showSb({open: true, message: "消息1。"})`：
+
+```jsx
+import {DoSnackbar, useSharedSnackbar} from "./main"
+
+function App() {
+  const {showSb} = useSharedSnackbar()
+
+  return (
+    <Stack>
+      <DoSnackbar/>
+
+      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
+        打开 Snakebar1
+      </Button>
+
+      <Button onClick={() => showSb({open: true, message: "消息2。"})}>
+        打开 Snakebar2
+      </Button>
+    </Stack>
+  )
+}
+```
+
+## DoDialog
 
 组件：对话框
 
@@ -102,7 +138,83 @@ export const DoSnackbarTest = () => {
 }
 ```
 
-### DoListAdd
+## DoDrawer
+
+组件：抽屉组件
+
+```jsx
+import {DoDrawer, useSharedDrawer} from "../main"
+
+function App() {
+  const {showDoDrawer} = useSharedDrawer()
+
+  return (
+    <Stack>
+      <DoDrawer/>
+
+      <Button onClick={() => showDrawer({open: true, content: "测试抽屉"})}>
+        打开 Drawer
+      </Button>
+    </Stack>
+  )
+}
+```
+
+## DoBackdrop
+
+组件：蒙版组件
+
+```jsx
+import {DoBackdrop, useSharedBackdrop} from "../main"
+
+function App() {
+  const {showDoBackdrop} = useSharedDrawer()
+
+  return (
+    <Stack>
+      <DoBackdrop/>
+
+      <Button onClick={() => showBackdrop({
+        open: true,
+        onClick: () => showBackdrop({open: false})
+      })}>
+        显示蒙版
+      </Button>
+    </Stack>
+  )
+}
+```
+
+## DoList
+
+组件：列表组件，滑动到上下两端时可加载更多数据
+
+```jsx
+import {useState} from "react"
+import {DoList} from "../main"
+import {ListItem} from "@mui/material"
+
+export const DoListTest = () => {
+  const step = 20
+  const [list, setList] = useState([...Array(step).keys()])
+
+  return (
+    <DoList width={"450px"} height={"100%"} border={"#AAA solid 1px"}
+            content={
+              list.map(item => <ListItem>{item}</ListItem>)
+            }
+            onLoadNext={() => {
+              setList(prev => [...prev, ...Array(step).keys()])
+            }}
+            onLoadPrev={() => {
+              setList(prev => [...Array(step).keys(), ...prev])
+            }}
+    />
+  )
+}
+```
+
+## DoListAdd
 
 组件：含添加新项的列表
 
@@ -151,7 +263,7 @@ export const DoListAddTest = () => {
 }
 ```
 
-### DoOptionsInput
+## DoOptionsInput
 
 组件：带选择框（可多个）的输入面板
 
@@ -182,35 +294,7 @@ export const DoOptionsInputTest = () => {
 }
 ```
 
-### DoSnackbar
-
-组件：提示消息
-
-全局引用`<DoSnackbar/>`，再在需要的地方修改显示`showSb({open: true, message: "消息1。"})`：
-
-```jsx
-import {DoSnackbar, useSharedSnackbar} from "./main"
-
-function App() {
-  const {showSb} = useSharedSnackbar()
-
-  return (
-    <Stack>
-      <DoSnackbar/>
-
-      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
-        打开 Snakebar1
-      </Button>
-
-      <Button onClick={() => showSb({open: true, message: "消息2。"})}>
-        打开 Snakebar2
-      </Button>
-    </Stack>
-  )
-}
-```
-
-### DoSvgIcon
+## DoSvgIcon
 
 组件：图标
 
@@ -220,6 +304,7 @@ function App() {
 import {DoSvgIcon} from "./main"
 // webpack 中
 import {ReactComponent as IconSettings} from "./test/icons/settings.svg"
+
 // snowpack 中可配合`snowpack-plugin-svgr`插件使用
 
 function App() {
@@ -231,7 +316,7 @@ function App() {
 }
 ```
 
-### DoTextFieldBtn
+## DoTextFieldBtn
 
 组件：带确认按钮的文本输入框
 
@@ -255,7 +340,7 @@ export const DoTextFieldBtnTest = () => {
 }
 ```
 
-### DoPanel
+## DoPanel
 
 组件：默认固定高度为窗口高度，分 3 层的垂直面板，中间内容区可滚动
 
@@ -276,7 +361,7 @@ export const DoVpanelTest = () => {
 }
 ```
 
-### DoText
+## DoText
 
 组件：可设置行数的文本组件
 
@@ -292,3 +377,114 @@ export const DoTextTest = () => {
   )
 }
 ```
+
+## DoFileUpload
+
+组件：文件上传组件
+
+基础用法：
+
+```jsx
+import {DoFileUpload} from "../main"
+import {Button, Stack} from "@mui/material"
+
+export const DoFileUploadTest = () => {
+  return (
+    <Stack>
+      <Button onClick={() => {
+        (document.querySelector("#abc")as HTMLElement).click()
+      }}>上传文件</Button>
+
+      <DoFileUpload id={"abc"} apiURL={"https://example.com/upload"}/>
+    </Stack>
+  )
+}
+```
+
+高级用法
+
+当需要传递请求头`headers`，而值需要通过`await`异步获取时，可以使用`setState`，在点击了`Button`时更新`setHeaders`即可
+
+## DoAutocomplete
+
+组件：自动完成输入框组件
+
+```jsx
+import {DoAutocomplete} from "../main"
+import {useState} from "react"
+
+export const DoAutocompleteTest = () => {
+  const [options, setOptions] = useState(["选项1", "选项2", "选项3"])
+
+  return (
+    <DoAutocomplete label={"输入姓名"} options={options}
+                    onEnter={option => alert(`点击了选项${option}`)}
+
+                    onDelOption={option => {
+                      setOptions(prev => {
+                        let n = [...prev]
+                        n.splice(n.findIndex(item => item == option), 1)
+                        return n
+                      })
+                    }}/>
+  )
+}
+```
+
+# 新添加组件的步骤
+
+## 新建源码文件
+
+在`src/components`目录下，新建组件文件，格式为`.tsx`
+
+## 编写组件
+
+完成后，并导出`组件`、`props属性类型`、`useShared*`（可选）
+
+```jsx
+   // 属性类型
+   export type DoBackdropProps = {
+      // 是否显示
+      open: Boolean
+   }
+   
+   // 在其它地方共享
+   export const useSharedBackdrop = () => useBetween(useBackdrop)
+   
+   // 导出组件
+   export default DoBackdrop
+```
+
+## 再次导出组件
+
+在`main.tsx`中再次统一导出。如果自动提示无效，可以手动输入组件路径导出
+
+```jsx
+   import DoBackdrop, {DoBackdropProps, useSharedBackdrop} from "./components/DoBackdrop"
+   
+   export {DoBackdrop, useSharedBackdrop}
+   export type {DoBackdropProps}
+```
+
+### 测试组件
+
+1. 在`test`文件夹中新建测试文件`DoSnackbar_test.tsx`，编写使用对应组件的代码
+2. 在`index.tsx`文件中添加第一步中测试组件的路由。如果该组件是全局组件，可以在`Router`上面一层全局引用
+    ```jsx
+   <Route path="/DoSnackbar_Dialog" element={<DoSnackbarTest/>}/>
+   ```
+3. 在`App.tsx`文件中添加路由的入口，注意`to`对应上步的`path`
+    ```jsx
+   <Link to={"DoSnackbar_Dialog"}><Button size={"large"}>DoSnackbar_Dialog</Button></Link>
+   ```
+4. 执行`yarn start`点击入口，测试功能
+
+## 编译
+
+1. 执行`yarn build`
+
+## 发布
+
+1. 根据文档开头的提示，删除不必要的文件、文件夹
+2. 修改`package.json`中的版本信息`version`
+3. 执行`npm publish`，推送到仓库

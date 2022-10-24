@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import App from './App'
 import "./index.css"
 import {HashRouter, Route, Routes} from "react-router-dom"
@@ -9,14 +9,22 @@ import {DoVpanelTest} from "./test/DoVpanel_test"
 import {DoOptionsInputTest} from "./test/DoOptionsInput_test"
 import {DoListAddTest} from "./test/DoListAdd_test"
 import {DoBackupPanelTest} from "./test/DoBackupPanel_test"
-import {DoDialog, DoSnackbar} from "./main"
+import {DoBackdrop, DoDialog, DoDrawer, DoSnackbar} from "./main"
 import {DoDelRevokeTest} from "./test/DoDelRevoke_test"
 import {DoTextTest} from "./test/DoText_test"
+import {DoFileUploadTest} from "./test/DoFileUpload_test"
+import {DoListTest} from "./test/DoList_test"
+import {DoAutocompleteTest} from "./test/DoAutocomplete_test"
 
-ReactDOM.render(
+const container = document.getElementById('root')
+const root = createRoot(container!)
+
+root.render(
   <React.StrictMode>
     <DoSnackbar/>
     <DoDialog/>
+    <DoDrawer/>
+    <DoBackdrop/>
 
     <HashRouter>
       <Routes>
@@ -29,8 +37,10 @@ ReactDOM.render(
         <Route path="/DoBackupPanel" element={<DoBackupPanelTest/>}/>
         <Route path="/DoDelRevoke" element={<DoDelRevokeTest/>}/>
         <Route path="/DoText" element={<DoTextTest/>}/>
+        <Route path="/DoFileUpload" element={<DoFileUploadTest/>}/>
+        <Route path="/DoList" element={<DoListTest/>}/>
+        <Route path="/DoAutocomplete" element={<DoAutocompleteTest/>}/>
       </Routes>
     </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )

@@ -10,66 +10,123 @@ import {
 } from "@mui/material"
 import {SxProps} from "@mui/system"
 
-// 行为按钮的属性
+/**
+ * 对话框中按钮的属性
+ */
 export type DoDialogBtnProps = {
+  /**
+   * 按钮的文本
+   */
   text: string
+  /**
+   * 按钮的属性
+   */
   props?: ButtonProps
+  /**
+   * 点击的回调
+   */
   onClick?: () => void
 }
-// 控制显示 Dialog
+
+/**
+ * 控制显示 Dialog 的属性
+ */
 export type DoDialogProps = {
-  // 是否显示
+  /**
+   * 是否显示
+   */
   open: boolean
-
-  // 标题
+  /**
+   * 标题
+   */
   title?: string
-
-  // 消息、内容，内容在消息下面，可以为复杂组件
+  /**
+   * 消息
+   */
   message?: string
+  /**
+   * 内容在消息下面显示，可以为复杂组件
+   */
   content?: React.ReactNode
-
-  // 是否显示顶部、底部的分割线，默认 false
+  /**
+   * 是否显示顶部、底部的分割线
+   *
+   * 默认 false
+   */
   dividers?: boolean
-
-  // 是否为模态对话框，默认 false
+  /**
+   * 是否为模态对话框
+   *
+   * 默认 false
+   */
   modal?: boolean
-
-  // 是否以最大宽度显示
+  /**
+   * 是否以最大宽度显示
+   */
   fullWidth?: boolean
-
-  // 增加对应按钮、行为，仅当 action 为**空**时有效
+  /**
+   * 增加确定按钮和其行为，仅当 action 为**空**时有效
+   */
   btnOK?: DoDialogBtnProps
+  /**
+   * 增加取消按钮和其行为，仅当 action 为**空**时有效
+   */
   btnCancel?: DoDialogBtnProps
-
-  // 可覆盖上面的确认、取消按钮和行为
-  // 传递此参数后，需要自行处理关闭对话框
+  /**
+   * 对话框的行为按钮
+   *
+   * 可覆盖上面的确认、取消按钮
+   *
+   * 传递此参数后，需要**自行处理**关闭对话框
+   */
   action?: React.ReactNode
-
-  // CSS
+  /**
+   * 定义对话框的样式
+   */
   sx?: SxProps<Theme>
 }
 
 // 初始属性
-const initProps: DoDialogProps = {open: false, modal: false, fullWidth: true}
+const initProps: DoDialogProps = {
+  open: false,
+  title: "",
+  message: "",
+  content: "",
+  dividers: false,
+  modal: false,
+  fullWidth: true,
+  btnOK: undefined,
+  btnCancel: undefined,
+  action: undefined,
+  sx: undefined
+}
 
 // 共享 Dialog
 const useDialog = () => {
   const [dialogProps, setDialogProps] = useState<DoDialogProps>(initProps)
+
   const showDialog = useCallback((ps: DoDialogProps) =>
     setDialogProps({...initProps, ...ps}), [])
 
   return {dialogProps, showDialog}
 }
 
-// 共享 Dialog 需要展示的数据
+/**
+ * 共享 Dialog 需要展示的数据
+ */
 export const useSharedDialog = () => useBetween(useDialog)
 
-// 对话框组件
+/**
+ * 对话框组件
+ *
+ * 在对话框中显示内容和操作按钮
+ */
 const DoDialog = () => {
   const {dialogProps, showDialog} = useSharedDialog()
 
   return (
-    <Dialog open={dialogProps.open} scroll={"paper"} fullWidth={dialogProps.fullWidth} sx={dialogProps.sx}
+    <Dialog open={dialogProps.open} scroll={"paper"} fullWidth={dialogProps.fullWidth}
+            sx={dialogProps.sx}
             onClose={(_, reason) => {
               // 为模态对话框时，点击外部不关闭
               if (dialogProps.modal && (reason === "backdropClick" || reason === "escapeKeyDown")) {

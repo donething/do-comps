@@ -1,13 +1,11 @@
 {
   "name": "do-comps",
-  "version": "0.2.32",
+  "version": "0.2.40",
   "description": "常用组件库，基于 MUI",
+  "type": "module",
   "main": "dist/main.js",
   "module": "dist/main.es.js",
   "private": false,
-  "dependencies": {
-    "do-utils": "^1.0.45"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "rollup -c",
@@ -32,33 +30,35 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "use-between": "^1.3.4"
+  },
   "devDependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.1",
-    "@rollup/plugin-commonjs": "^21.1.0",
-    "@rollup/plugin-node-resolve": "^13.2.1",
-    "@rollup/plugin-typescript": "^8.3.2",
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^9.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/chrome": "^0.0.181",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/chrome": "^0.0.199",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.4",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react-dom": "^18.0.7",
     "@types/react-router-dom": "^5.3.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "rollup": "^2.70.2",
-    "rollup-plugin-dts": "^4.2.1",
+    "rollup": "^3.2.3",
+    "rollup-plugin-dts": "^5.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.4.2",
-    "use-between": "^1.3.1"
+    "typescript": "^4.6.3"
   },
   "files": [
     "dist/main.*"

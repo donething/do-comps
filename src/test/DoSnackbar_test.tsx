@@ -1,5 +1,5 @@
 import {AlertTitle, Button, Stack} from "@mui/material"
-import {BrightAlert, useSharedDialog, useSharedSnackbar} from "../main"
+import {BrightAlert, useSharedBackdrop, useSharedDialog, useSharedDrawer, useSharedSnackbar} from "../main"
 import DoSvgIcon from "../components/DoSvgIcon"
 // @ts-ignore
 import {ReactComponent as icon} from "../test/icons/settings.svg"
@@ -7,6 +7,8 @@ import {ReactComponent as icon} from "../test/icons/settings.svg"
 export const DoSnackbarTest = () => {
   const {showSb} = useSharedSnackbar()
   const {showDialog} = useSharedDialog()
+  const {showDrawer} = useSharedDrawer()
+  const {showBackdrop} = useSharedBackdrop()
 
   return (
     <Stack>
@@ -56,6 +58,17 @@ export const DoSnackbarTest = () => {
         open: true, title: "标题", message: "消息3。", fullWidth: true
       })}>
         打开 Dialog3
+      </Button>
+
+      <Button onClick={() => showDrawer({open: true, content: "测试抽屉"})}>
+        打开 抽屉
+      </Button>
+
+      <Button onClick={() => showBackdrop({
+        open: true,
+        onClick: () => showBackdrop({open: false})
+      })}>
+        显示蒙版
       </Button>
     </Stack>
   )
