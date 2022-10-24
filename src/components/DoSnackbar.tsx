@@ -33,7 +33,7 @@ export type DoSnackbarProps = {
    */
   open?: boolean
   /**
-   * 指定时间后自动隐藏，单位毫秒。设 null 则不自动隐藏
+   * 指定时间后自动隐藏，单位毫秒。设 null 则不自动隐藏，此时将出现关闭按钮
    */
   autoHideDuration?: number
   /**
@@ -61,7 +61,7 @@ export type DoSnackbarProps = {
   /**
    * 是否显示自定义的关闭按钮
    *
-   * 若 autoHideDuration 为空时需指定以便关闭
+   * 当 autoHideDuration 为 null 时，将出现关闭按钮
    */
   showCloseBn?: boolean
   /**
@@ -131,9 +131,11 @@ const DoSnackbar = () => {
              action={<Stack direction={"row"} alignItems={"center"}>
                {sbProps.action}
 
-               {sbProps.showCloseBn && <IconButton aria-label={"关闭"} onClick={() => showSb({open: false})}>
-                 <CloseOutlinedIcon/>
-               </IconButton>}
+               {(!sbProps.autoHideDuration || sbProps.showCloseBn) &&
+                 <IconButton aria-label={"关闭"} onClick={() => showSb({open: false})}>
+                   <CloseOutlinedIcon/>
+                 </IconButton>
+               }
              </Stack>}
              onClose={!sbProps.onClose ? undefined : () => {
                showSb({open: false})
