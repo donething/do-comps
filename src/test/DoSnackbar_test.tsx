@@ -20,7 +20,7 @@ export const DoSnackbarTest = () => {
       <DoSvgIcon svg={icon}/>
       <DoSvgIcon svg={icon} size={"large"}/>
 
-      <Button onClick={() => showSb({open: true, message: "消息1。"})}>
+      <Button onClick={() => showSb({open: true, message: "消息1。", severity: "success"})}>
         打开 Snakebar1
       </Button>
 
@@ -29,13 +29,12 @@ export const DoSnackbarTest = () => {
       </Button>
 
       <Button onClick={() => showSb({
-        open: true, title: "", message: "消息3。", showCloseBn: true, onClose: () => {
-        }
+        open: true, title: "", message: "消息3。", showCloseBn: true
       })}>
         打开 Snakebar3
       </Button>
 
-      <Button onClick={() => showSb({open: true, title: "", message: "消息4。", action: <Button>确定</Button>})}>
+      <Button onClick={() => showSb({open: true, message: "消息4。", action: <Button>确定</Button>})}>
         打开 Snakebar4
       </Button>
 
