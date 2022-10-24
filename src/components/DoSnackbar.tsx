@@ -87,8 +87,15 @@ const initProps: DoSnackbarProps = {
 const useSnackbar = () => {
   const [sbProps, setSbProps] = React.useState<DoSnackbarProps>(initProps)
 
-  const showSb = useCallback((ps: DoSnackbarProps) =>
-    setSbProps({...initProps, ...ps}), [])
+  const showSb = useCallback((ps: DoSnackbarProps) => {
+    // 在关闭时，仅改变`open`属性，不改变其它属性，可以避免重新渲染时的残影
+    if (ps.open === false) {
+      setSbProps(prev => ({...prev, open: false}))
+      setSbProps({...initProps, open: false})
+    } else {
+      setSbProps({...initProps, ...ps})
+    }
+  }, [])
 
   return {sbProps, showSb}
 }
