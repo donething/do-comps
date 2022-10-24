@@ -33,7 +33,7 @@ export type DoSnackbarProps = {
    */
   open?: boolean
   /**
-   * 指定时间后自动隐藏，单位毫秒
+   * 指定时间后自动隐藏，单位毫秒。设 null 则不自动隐藏
    */
   autoHideDuration?: number
   /**
