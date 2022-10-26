@@ -52,13 +52,16 @@ const DoTextFieldBtn = React.memo((props: DoTextFieldBtnType & TextFieldProps): 
                      clearAfterEnter && setValue("")
                    }}>
                      {
+                       /* 没有找到自动填充按钮到父元素高度的办法，暂时硬编码设置高度 */
                        typeof enterNode !== "string" ? <IconButton>{enterNode}</IconButton> :
-                         <Button variant={"contained"} disableElevation>
+                         <Button variant={"contained"} disableElevation
+                                 sx={{height: `${props.size === "small" ? 40 : 56}px`}}>
                            {enterNode}
                          </Button>
                      }
-                   </InputAdornment>
-                 )
+                   </InputAdornment>),
+
+                 style: {paddingRight: typeof enterNode !== "string" ? "" : 0}
                }}
 
                onKeyDown={event => {

@@ -1,7 +1,5 @@
 import {AlertTitle, Button, Stack} from "@mui/material"
 import {BrightAlert, useSharedBackdrop, useSharedDialog, useSharedDrawer, useSharedSnackbar} from "../main"
-// @ts-ignore
-import {ReactComponent as icon} from "../test/icons/settings.svg"
 import React, {useState} from "react"
 
 export const DoSnackbarTest = () => {
