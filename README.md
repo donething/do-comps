@@ -1,7 +1,6 @@
 # do-comps
 
-发布：使用`yarn build`编译完成后，需要**删除**`dist`文件夹下除了`main.*`以外的所有文件
-文件夹
+发布：使用`yarn build`编译完成后，只需发布`dist/main.*`文件到`npm`。由于已在`package.json`的`files`属性中配置。不需要手动删除`dist`中的其它文件
 
 使用：在其它工程引用本库时，`import`的来源应为`do-comps`，不可以含路径，如`do-comps/dist/main`。
 
