@@ -46,7 +46,7 @@ export type DoOptionsInputProps = {
 /**
  * 含前置选择框的输入框
  */
-const DoOptionsInput = function (props: DoOptionsInputProps): JSX.Element {
+const DoOptionsInput = React.memo((props: DoOptionsInputProps): JSX.Element => {
   // [多个]前置选择框被选择的值，该值将被在事件中传递到父组件
   const [sList, setSList] = useState<Array<string>>(props.optionsList.map(item => item.options[0].value))
 
@@ -93,6 +93,6 @@ const DoOptionsInput = function (props: DoOptionsInputProps): JSX.Element {
                       onEnter={value => props.onEnter(value, sList)}/>
     </Stack>
   )
-}
+})
 
 export default DoOptionsInput

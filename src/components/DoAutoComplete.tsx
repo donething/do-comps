@@ -5,7 +5,7 @@ import {
   ListItemText,
   TextField
 } from "@mui/material"
-import {HTMLAttributes} from "react"
+import React, {HTMLAttributes} from "react"
 import CloseIcon from '@mui/icons-material/Close'
 
 /**
@@ -35,11 +35,11 @@ export type DoAutocompleteProps = {
  *
  * 含有选择列表的文本输入框，可根据输入文本过滤选择列表
  */
-const DoAutocomplete = (props: DoAutocompleteProps) => {
+const DoAutocomplete = React.memo((props: DoAutocompleteProps) => {
   const {label, options, onEnter, onDelOption, ...ps} = props
 
   return (
-    <Autocomplete size={"small"} disablePortal freeSolo {...ps}
+    <Autocomplete size={"small"} disablePortal freeSolo {...ps} clearText={"清空"}
                   options={options}
 
                   renderOption={(ops: HTMLAttributes<HTMLElement>, option: string) => {
@@ -65,9 +65,10 @@ const DoAutocomplete = (props: DoAutocompleteProps) => {
                                    onEnter(keyword)
                                  }
                                }}
-                    />}
+                    />
+                  }
     />
   )
-}
+})
 
 export default DoAutocomplete

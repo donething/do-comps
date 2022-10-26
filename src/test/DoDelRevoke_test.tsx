@@ -4,6 +4,8 @@ import {delRevoke, useSharedSnackbar} from "../main"
 import {delRevokeArray} from "../main"
 
 export const DoDelRevokeTest = () => {
+  const [count, setCount] = useState(0)
+
   const [nums, setNums] = useState([1, 2, 3])
   const [nums2, setNums2] = useState([19, 21, 32])
 
@@ -35,6 +37,9 @@ export const DoDelRevokeTest = () => {
 
   return (
     <Stack spacing={3}>
+      <div>{count}</div>
+      <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染 DoAutocomplete</Button>
+      
       <ul>
         {list1}
       </ul>

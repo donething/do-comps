@@ -17,15 +17,15 @@ export type DoFilesUploadProps = {
    */
   accept?: string
   /**
-   * 上传文件时可能需要发送的请求头，可用于验证权限
+   * 上传文件时可能需要发送的请求头，可用于根据请求头验证访问权限的场景
    */
   headers?: HeadersInit
   /**
-   * 当选择完文件后执行上传的请求，可以自定义
+   * 当选择完文件后真正发起上传的网络请求，可以自定义
    */
   handleChoose?: (e: React.ChangeEvent<HTMLInputElement>) => void
   /**
-   * 每个文件**开始**上传后的回调
+   * 每个文件**开始**上传后的回调，可用于显示提示“开始上传”
    * @param name 文件名
    */
   onUpload?: (name: string) => void
@@ -42,9 +42,9 @@ export type DoFilesUploadProps = {
  *
  * 需要通过代码触发点击事件，弹出文件选择框。参考`DoFilesUploadProps`的`id`属性
  */
-const DoFilesUpload = (props: DoFilesUploadProps) => {
+const DoFilesUpload = React.memo((props: DoFilesUploadProps) => {
   // 当选择了文件时触发上传文件事件
-  const handleChoose = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChooseDefault = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let files = e.target.files
     if (!files) {
       console.log("没有需要上传的文件")
@@ -74,7 +74,7 @@ const DoFilesUpload = (props: DoFilesUploadProps) => {
 
   return (
     <input type="file" accept={props.accept || "*"} id={props.id} multiple hidden
-           onChange={handleChoose}
+           onChange={props.handleChoose || handleChooseDefault}
            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
              // 和 onChange 分开，以避免在上传完成后在 filesStatus 中找不到项目的问题
              let files = e.target.files
@@ -86,6 +86,6 @@ const DoFilesUpload = (props: DoFilesUploadProps) => {
            }}
     />
   )
-}
+})
 
 export default DoFilesUpload

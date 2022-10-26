@@ -6,7 +6,7 @@ import {BoxProps, Stack, StackProps} from "@mui/material"
  *
  * 包含标题文字、工具按钮集，将两端对齐
  */
-const DoPanelHeader = (props: BoxProps & StackProps & { children: React.ReactNode }) => {
+export const DoPanelHeader = React.memo((props: BoxProps & StackProps & { children: React.ReactNode }) => {
   const {children, ...ps} = props
 
   return (
@@ -15,14 +15,14 @@ const DoPanelHeader = (props: BoxProps & StackProps & { children: React.ReactNod
       {children}
     </Stack>
   )
-}
+})
 
 /**
  * 面板主内容
  *
  * 默认方向为“列”
  */
-const DoPanelContent = (props: BoxProps & StackProps & { children: React.ReactNode }) => {
+export const DoPanelContent = React.memo((props: BoxProps & StackProps & { children: React.ReactNode }) => {
   const {children, ...ps} = props
 
   return (
@@ -30,25 +30,26 @@ const DoPanelContent = (props: BoxProps & StackProps & { children: React.ReactNo
       {children}
     </Stack>
   )
-}
+})
 
 /**
  * 面板底部
  */
-const DoPanelFooter = (props: BoxProps & StackProps & { children: React.ReactNode }) => {
-  const {children, ...ps} = props
+export const DoPanelFooter = React.memo(
+  (props: BoxProps & StackProps & { children: React.ReactNode }) => {
+    const {children, ...ps} = props
 
-  return (
-    <Stack flex={"0 1 auto"} paddingTop={2} {...ps}>
-      {children}
-    </Stack>
-  )
-}
+    return (
+      <Stack flex={"0 1 auto"} paddingTop={2} {...ps}>
+        {children}
+      </Stack>
+    )
+  })
 
 /**
  * 面板，默认垂直布局
  */
-const DoPanel = (props: BoxProps & StackProps & { children: React.ReactNode }): JSX.Element => {
+const DoPanel = React.memo((props: BoxProps & StackProps & { children: React.ReactNode }) => {
   const {children, ...ps} = props
 
   return (
@@ -56,6 +57,6 @@ const DoPanel = (props: BoxProps & StackProps & { children: React.ReactNode }): 
       {children}
     </Stack>
   )
-}
+})
 
-export {DoPanel, DoPanelHeader, DoPanelContent, DoPanelFooter}
+export default DoPanel

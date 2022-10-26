@@ -1,7 +1,7 @@
 import React from "react"
 import {Avatar, Divider, ListItem, ListItemAvatar, ListItemText, SxProps, Theme} from "@mui/material"
 import DoOptionsInput, {DoOptionsInputProps} from "./DoOptionsInput"
-import {DoPanel, DoPanelHeader, DoPanelContent, DoPanelFooter} from "./DoPanel"
+import DoPanel, {DoPanelHeader, DoPanelContent, DoPanelFooter} from "./DoPanel"
 import {DoTextTitle} from "./DoText"
 import {alpha} from '@mui/material/styles'
 
@@ -108,7 +108,7 @@ export type DoListAddProps = {
  *
  * 顶部为卡片头，中部为列表以显示数据，底部为添加项目的工具栏
  */
-const DoListAdd = (props: DoListAddProps): JSX.Element => {
+const DoListAdd = React.memo((props: DoListAddProps): JSX.Element => {
   return (
     <DoPanel sx={props.sx} divider={<Divider/>}>
       <DoPanelHeader>
@@ -123,6 +123,6 @@ const DoListAdd = (props: DoListAddProps): JSX.Element => {
       <DoPanelFooter>{props.inputProps ? (<DoOptionsInput {...props.inputProps}/>) : undefined}</DoPanelFooter>
     </DoPanel>
   )
-}
+})
 
 export default DoListAdd

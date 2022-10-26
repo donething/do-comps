@@ -1,10 +1,20 @@
 import {DoText, DoTextTitle} from "../components/DoText"
-import {Stack} from "@mui/material"
+import {Button, Stack} from "@mui/material"
+import React from "react"
 
 export const DoTextTest = () => {
+  const [count, setCount] = React.useState(0)
+
+  const handleTitleClick = React.useCallback(() => console.log("点击了标题"), [])
+
   return (
-    <Stack spacing={3}>
-      <DoTextTitle>测试标题</DoTextTitle>
+    <Stack gap={2}>
+      <Stack>
+        <div>{count}</div>
+        <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染</Button>
+      </Stack>
+
+      <DoTextTitle onClick={handleTitleClick}>测试标题</DoTextTitle>
 
       <DoText lines={2} color={"green"}>是的，它是一个比率：1.5 表示元素字体大小的 1.5 倍。所以它的含义与
         1.5em 或 150%
@@ -14,7 +24,8 @@ export const DoTextTest = () => {
         的值，这意味着该元素为
         15pt。另一方面，如果将行高设置为1.5em或150%，则子级将继承计算值 36pt，从而产生怪诞的行距。
         从技术上讲，这隐藏在一个表述下。对于用作line-height值的纯数字：“计算值与指定值相同。”
-        因此，名义上，子代继承了“计算”值 1.5，然后将在子代的上下文中进行解释（其字体大小的 1.5 倍）。</DoText>
+        因此，名义上，子代继承了“计算”值 1.5，然后将在子代的上下文中进行解释（其字体大小的 1.5 倍）。
+      </DoText>
 
       <DoText>
         but the problem is that this code makes everything in one-line. I want to go with 3 lines of text then... I

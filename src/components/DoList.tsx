@@ -38,7 +38,7 @@ export type DoListProps = {
  *
  * 上下滑动到两端，可加载更多的数据
  */
-const DoList = (props: BoxProps & StackProps & DoListProps) => {
+const DoList = React.memo((props: BoxProps & StackProps & DoListProps) => {
   const {content, onLoadPrev, toTop, onLoadNext, toBottom, waitInterval, ...ps} = props
 
   // 避免多次误触发滚动，再一次滚动操作后，需要等待一会才能再次触发
@@ -71,6 +71,6 @@ const DoList = (props: BoxProps & StackProps & DoListProps) => {
       {content}
     </Stack>
   )
-}
+})
 
 export default DoList

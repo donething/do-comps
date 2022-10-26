@@ -2,7 +2,9 @@ import {Backdrop, CircularProgress, SxProps} from "@mui/material"
 import React, {useCallback, useState} from "react"
 import {useBetween} from "use-between"
 
-// 控制蒙版组件 Backdrop 的信息
+/**
+ * 控制蒙版组件 Backdrop 的信息
+ */
 export type DoBackdropProps = {
   /**
    * 是否显示
@@ -22,10 +24,14 @@ export type DoBackdropProps = {
   onClick?: (event: React.MouseEvent) => void
 }
 
-// 初始属性
+/**
+ * 初始属性
+ */
 const initProps: DoBackdropProps = {open: false, content: <CircularProgress/>, bg: "", onClick: undefined}
 
-// 共享蒙版组件 Backdrop 需要展示的数据
+/**
+ * 共享蒙版组件 Backdrop 需要展示的数据
+ */
 const useBackdrop = () => {
   const [backdropProps, setBackdropProps] = useState(initProps)
 

@@ -23,7 +23,7 @@ export type DoTextProps = TypographyProps & {
  * 可传递`Typography`的属性
  * @see https://stackoverflow.com/questions/63592567/material-ui-text-ellipsis-after-two-line
  */
-const DoText = (props: DoTextProps): JSX.Element => {
+const DoText = React.memo((props: DoTextProps): JSX.Element => {
   // 单独提取 sx，以免被覆盖
   const {children, lines, ...ps} = props
 
@@ -33,19 +33,19 @@ const DoText = (props: DoTextProps): JSX.Element => {
       {children}
     </Typography>
   )
-}
+})
 
 /**
  * 标题组件
  *
  * 可传递`Typography`的属性
  */
-const DoTextTitle = (props: TypographyProps & { children: string }) => {
+const DoTextTitle = React.memo((props: TypographyProps & { children: string }) => {
   const {children, ...ps} = props
 
   return (
     <DoText padding={1} paddingLeft={2} fontWeight={400} fontSize={"1.2rem"} {...ps}>{children}</DoText>
   )
-}
+})
 
 export {DoText, DoTextTitle}

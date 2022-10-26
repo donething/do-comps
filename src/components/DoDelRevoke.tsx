@@ -13,11 +13,11 @@ import React from "react"
  * @param revoke 撤销删除，恢复数据，并保存
  * @param showSb 控制 DoSnackbar ，显示撤销按钮
  */
-export const delRevoke = function <T>(title: string | number,
-                                      data: T,
-                                      remove: () => void,
-                                      revoke: (origin: T) => void,
-                                      showSb: (ps: DoSnackbarProps) => void) {
+export const delRevoke = <T, >(title: string | number,
+                               data: T,
+                               remove: () => void,
+                               revoke: (origin: T) => void,
+                               showSb: (ps: DoSnackbarProps) => void) => {
   // 预先保存被删除的信息，以供撤销删除
   let deledData = JSON.stringify(data)
 

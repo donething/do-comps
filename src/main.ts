@@ -1,9 +1,8 @@
-import DoSvgIcon, {DoSvgIconProps} from "./components/DoSvgIcon"
 import DoSnackbar, {BrightAlert, DoSnackbarProps, useSharedSnackbar} from "./components/DoSnackbar"
 import DoDialog, {DoDialogBtnProps, DoDialogProps, useSharedDialog} from "./components/DoDialog"
 import DoDrawer, {DoDrawerProps, useSharedDrawer} from "./components/DoDrawer"
 import DoBackdrop, {DoBackdropProps, useSharedBackdrop} from "./components/DoBackdrop"
-import {DoPanel, DoPanelHeader, DoPanelContent, DoPanelFooter} from "./components/DoPanel"
+import DoPanel, {DoPanelHeader, DoPanelContent, DoPanelFooter} from "./components/DoPanel"
 import DoTextFieldBtn, {DoTextFieldBtnType} from "./components/DoTextFieldBtn"
 import DoOptionsInput, {DoOptionsInputProps, OptionsListType} from "./components/DoOptionsInput"
 import DoListAdd, {DoListAddProps, DoLItemProps} from "./components/DoListAdd"
@@ -17,6 +16,7 @@ import {DoText, DoTextTitle, DoTextProps} from "./components/DoText"
 import DoFileUpload, {DoFilesUploadProps} from "./components/DoFileUpload"
 import DoList, {DoListProps} from "./components/DoList"
 import DoAutocomplete, {DoAutocompleteProps} from "./components/DoAutoComplete"
+import DoPasswdField, {DoPasswdFieldProps} from "./components/DoPasswdField"
 
 export {DoBackupPanel, DoBackupPanelChromium}
 export type {DoBackupPanelProps, DoBackupPanelBaseProps}
@@ -41,9 +41,6 @@ export type {DoListAddProps, DoLItemProps}
 export {DoOptionsInput,}
 export type {OptionsListType, DoOptionsInputProps}
 
-export {DoSvgIcon}
-export type {DoSvgIconProps}
-
 export {DoText, DoTextTitle}
 export type {DoTextProps}
 
@@ -60,3 +57,6 @@ export type {DoListProps}
 
 export {DoAutocomplete}
 export type {DoAutocompleteProps}
+
+export {DoPasswdField}
+export type {DoPasswdFieldProps}

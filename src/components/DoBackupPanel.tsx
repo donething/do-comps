@@ -4,6 +4,7 @@ import {useSharedSnackbar} from "./DoSnackbar"
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import CenterFocusStrongOutlinedIcon from '@mui/icons-material/CenterFocusStrongOutlined'
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
+import React from "react"
 
 /**
  * 备份面板的基础属性
@@ -49,9 +50,11 @@ export type DoBackupPanelProps = DoBackupPanelBaseProps & {
  *
  * **依赖** DoSnackbar、DoDialog 组件，提供消息提示，可在`index.tsx`全局引入
  */
-const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
+const DoBackupPanel = React.memo((props: DoBackupPanelProps): JSX.Element => {
   const {showSb} = useSharedSnackbar()
   const {showDialog} = useSharedDialog()
+
+  console.log("重新渲染 组件")
 
   return (
     <Card sx={{width: 300}} {...props.cardProps}>
@@ -138,7 +141,7 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
       </CardContent>
     </Card>
   )
-}
+})
 
 /**
  * 备份、恢复 chromium storage 的数据面板
@@ -147,7 +150,7 @@ const DoBackupPanel = (props: DoBackupPanelProps): JSX.Element => {
  *
  * **依赖** DoSnackbar、DoDialog 组件，可在`index.tsx`全局引入
  */
-export const DoBackupPanelChromium = (props: DoBackupPanelBaseProps): JSX.Element => {
+export const DoBackupPanelChromium = React.memo((props: DoBackupPanelBaseProps): JSX.Element => {
   return (
     <DoBackupPanel title={props.title || "Storage"}
                    filename={props.filename || `${chrome.runtime.getManifest().name}.json`}
@@ -177,29 +180,30 @@ export const DoBackupPanelChromium = (props: DoBackupPanelBaseProps): JSX.Elemen
                    }}
     />
   )
-}
+})
 
 /**
  * 保存数据到本地
- * @param data 任意类型的数据
+ * @param data 文本或JSON对象的数据
  * @param filename 指定文件名
  * @see https://juejin.cn/post/6844903699496566792
  */
-const download = (data: any, filename: string) => {
+const download = (data: string | object, filename: string) => {
+  let bdata: Array<string>
   switch (typeof data) {
     // 如果是对象，先转为JSON字符串，再保存
     case "object":
-      data = JSON.stringify(data)
+      let str = JSON.stringify(data)
       // [data]表示将 data 转为数组
-      data = [data]
+      bdata = [str]
       break
     case "string":
       // [data]表示将 data 转为数组
-      data = [data]
+      bdata = [data]
       break
   }
 
-  let blob = new Blob(data)
+  let blob = new Blob(bdata)
   let a = document.createElement('a')
   let url = window.URL.createObjectURL(blob)
   a.href = url

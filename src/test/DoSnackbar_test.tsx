@@ -1,24 +1,25 @@
 import {AlertTitle, Button, Stack} from "@mui/material"
 import {BrightAlert, useSharedBackdrop, useSharedDialog, useSharedDrawer, useSharedSnackbar} from "../main"
-import DoSvgIcon from "../components/DoSvgIcon"
 // @ts-ignore
 import {ReactComponent as icon} from "../test/icons/settings.svg"
+import React, {useState} from "react"
 
 export const DoSnackbarTest = () => {
+  const [count, setCount] = useState(0)
+
   const {showSb} = useSharedSnackbar()
   const {showDialog} = useSharedDialog()
   const {showDrawer} = useSharedDrawer()
   const {showBackdrop} = useSharedBackdrop()
 
+  const handleSvgClick = React.useCallback(() => console.log("点击了SVG图标"), [])
+
   return (
     <Stack>
-      <BrightAlert>
-        <AlertTitle>标题</AlertTitle>
-        内容！
-      </BrightAlert>
+      <div>{count}</div>
+      <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染 DoAutocomplete</Button>
 
-      <DoSvgIcon svg={icon}/>
-      <DoSvgIcon svg={icon} size={"large"}/>
+      <BrightAlert><AlertTitle>标题</AlertTitle>内容！</BrightAlert>
 
       <Button onClick={() => showSb({open: true, message: "消息1。", severity: "success"})}>
         打开 Snakebar1

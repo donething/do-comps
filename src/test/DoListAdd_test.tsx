@@ -1,6 +1,6 @@
 import {DoListAdd, DoLItemProps, DoOptionsInputProps} from "../main"
-import {useEffect, useState} from "react"
-import {Button, Stack, Switch} from "@mui/material"
+import React, {useMemo, useState} from "react"
+import {Button, Stack, Switch, SxProps} from "@mui/material"
 
 // 初始数据
 const source = [
@@ -38,35 +38,46 @@ const source = [
 ]
 
 export const DoListAddTest = () => {
+  const [count, setCount] = useState(0)
+
   const [list, setList] = useState<Array<DoLItemProps>>(source)
 
-  const input: DoOptionsInputProps = {
-    size: "small",
-    enterNode: "确定",
-    onEnter(value: string, sList: Array<string>) {
-      setList(prev => {
-        let n: DoLItemProps = {id: sList[0] + sList[1] + value, primary: value, avatar: ""}
-        return [...prev, n]
-      })
-    },
-    optionsList: [{
-      label: "平台",
-      options: [{"title": "哔哩", "value": "bili", "tip": "主播的UID，不是房间号"}, {
-        "title": "斗鱼",
-        "value": "douyu",
-        "tip": "斗鱼房间号"
-      }]
-    }, {
-      label: "地区",
-      options: [{"title": "国区", "value": "cn", "tip": "国区"}, {"title": "俄罗斯", "value": "ru", "tip": "俄罗斯"}]
-    }],
-    placeholder: "输入框"
-  }
+  const genSx = useMemo((): SxProps => ({width: 500}), [])
+  const genSlot = useMemo((): JSX.Element => (<Button>测试按钮</Button>), [])
 
-  useEffect(() => {
-  }, [])
+  const getInput = useMemo((): DoOptionsInputProps => (
+    {
+      size: "small",
+      enterNode: "确定",
+      onEnter(value: string, sList: Array<string>) {
+        setList(prev => {
+          let n: DoLItemProps = {id: sList[0] + sList[1] + value, primary: value, avatar: ""}
+          return [...prev, n]
+        })
+      },
+      optionsList: [{
+        label: "平台",
+        options: [{"title": "哔哩", "value": "bili", "tip": "主播的UID，不是房间号"}, {
+          "title": "斗鱼",
+          "value": "douyu",
+          "tip": "斗鱼房间号"
+        }]
+      }, {
+        label: "地区",
+        options: [{"title": "国区", "value": "cn", "tip": "国区"}, {"title": "俄罗斯", "value": "ru", "tip": "俄罗斯"}]
+      }],
+      placeholder: "输入框"
+    }
+  ), [])
 
   return (
-    <DoListAdd sx={{width: 500}} title={"列表"} slot={<Button>测试按钮</Button>} list={list} inputProps={input}/>
+    <Stack direction={"row"} gap={2} height={"100%"}>
+      <Stack>
+        <div>{count}</div>
+        <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染</Button>
+      </Stack>
+
+      <DoListAdd sx={genSx} title={"列表"} slot={genSlot} list={list} inputProps={getInput}/>
+    </Stack>
   )
 }
