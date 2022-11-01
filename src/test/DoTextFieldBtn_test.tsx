@@ -24,6 +24,7 @@ export const DoTextFieldBtnTest = () => {
       <DoTextFieldBtn label={"输入框3"} size={"small"} enterNode={genSvgIcon} onEnter={handleEnter}/>
 
       <DoPasswdField label={"密码"} value={pass} setValue={setPass}/>
+      <DoPasswdField label={"密码"} value={pass} setValue={setPass} size={"medium"}/>
     </Stack>
   )
 }
