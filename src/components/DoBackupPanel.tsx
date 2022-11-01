@@ -82,7 +82,7 @@ const DoBackupPanel = React.memo((props: DoBackupPanelProps): JSX.Element => {
 
       <Divider/>
 
-      <CardContent sx={{display: "flex", flexFlow: "column nowrap", gap: 2}}>
+      <CardContent sx={{display: "flex", flexFlow: "column nowrap", gap: 4}}>
         {/* 从文件恢复配置 */}
         <label htmlFor="do-backup-file">
           <input accept={"*"} type="file" id={"do-backup-file"} hidden onChange={async event => {
@@ -120,17 +120,20 @@ const DoBackupPanel = React.memo((props: DoBackupPanelProps): JSX.Element => {
         </label>
 
         {/* 浏览配置 */}
-        <Button variant="outlined" startIcon={<CenterFocusStrongOutlinedIcon/>} onClick={async _ => {
-          // 读取数据
-          let data = await props.onRead()
+        <Button variant="outlined" startIcon={<CenterFocusStrongOutlinedIcon/>}
+                onClick={async _ => {
+                  // 读取数据
+                  let data = await props.onRead()
 
-          showDialog({
-            open: true,
-            title: `${props.title} 存储的数据`,
-            fullWidth: true,
-            message: JSON.stringify(data, null, 2)
-          })
-        }}>浏览配置</Button>
+                  showDialog({
+                    open: true,
+                    title: `${props.title} 存储的数据`,
+                    fullWidth: true,
+                    message: JSON.stringify(data, null, 2)
+                  })
+                }}>
+          浏览配置
+        </Button>
 
         {/*  保存配置到本地 */}
         <Button variant="outlined" startIcon={<FileDownloadOutlinedIcon/>} onClick={async _ => {
