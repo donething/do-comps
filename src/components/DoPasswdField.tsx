@@ -12,9 +12,18 @@ export type DoPasswdFieldProps = {
    */
   value: string
   /**
-   * 设置输入框状态值的函数
+   * 设置输入框状态值的 setState 函数。此属性为空时，setObject 才能生效
+   *
+   * 通常在 使用 useState 定义字符串变量时使用
    */
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  setValue?: React.Dispatch<React.SetStateAction<string>>
+  /**
+   * 设置输入框状态值的自定义函数
+   *
+   * 可在 使用 useState 定义对象时使用，如这个对象包含 用户名、密码时设置密码
+   * @param value 输入框的值
+   */
+  setObject?: (value: string) => void
   /**
    * 标签
    */
@@ -29,13 +38,14 @@ export type DoPasswdFieldProps = {
 const DoPasswdField = React.memo((props: DoPasswdFieldProps & TextFieldProps) => {
   const [showPasswd, setShowPasswd] = React.useState(false)
 
-  const {label, value, setValue, ...ps} = props
+  const {label, value, setValue, setObject, ...ps} = props
 
   const handleShowPasswd = () => setShowPasswd(prev => !prev)
 
   return (
     <TextField fullWidth label={label} value={value} type={showPasswd ? "text" : "password"}
-               onChange={event => setValue(event.target.value)}
+               onChange={event => setValue ? setValue(event.target.value) :
+                 setObject ? setObject(event.target.value) : console.log("[DoPasswdField] 设置状态的函数未定义")}
                InputProps={{
                  endAdornment: (
                    <InputAdornment position="end">
