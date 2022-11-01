@@ -43,7 +43,7 @@ const DoPasswdField = React.memo((props: DoPasswdFieldProps & TextFieldProps) =>
   const handleShowPasswd = () => setShowPasswd(prev => !prev)
 
   return (
-    <TextField fullWidth label={label} value={value} type={showPasswd ? "text" : "password"}
+    <TextField fullWidth label={label} size={"small"} value={value} type={showPasswd ? "text" : "password"}
                onChange={event => setValue ? setValue(event.target.value) :
                  setObject ? setObject(event.target.value) : console.log("[DoPasswdField] 设置状态的函数未定义")}
                InputProps={{
