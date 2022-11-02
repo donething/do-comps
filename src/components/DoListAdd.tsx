@@ -120,7 +120,11 @@ const DoListAdd = React.memo((props: DoListAddProps): JSX.Element => {
         {props.list.map(item => <LItem key={item.id} {...item}/>)}
       </DoPanelContent>
 
-      <DoPanelFooter>{props.inputProps ? (<DoOptionsInput {...props.inputProps}/>) : undefined}</DoPanelFooter>
+      <DoPanelFooter>
+        {props.inputProps ? (
+          <DoOptionsInput clearAfterEnter={true} {...props.inputProps}/>) : undefined
+        }
+      </DoPanelFooter>
     </DoPanel>
   )
 })
