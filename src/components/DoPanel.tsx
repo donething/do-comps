@@ -11,7 +11,7 @@ export const DoPanelHeader = React.memo((props: BoxProps & StackProps & { childr
 
   return (
     <Stack flex={"0 1 auto"} direction={"row"} flexWrap={"nowrap"} justifyContent={"space-between"}
-           alignItems={"center"} {...ps}>
+           alignItems={"center"} paddingLeft={2} paddingRight={2} {...ps}>
       {children}
     </Stack>
   )

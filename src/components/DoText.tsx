@@ -44,7 +44,7 @@ const DoTextTitle = React.memo((props: TypographyProps & { children: string }) =
   const {children, ...ps} = props
 
   return (
-    <DoText padding={1} paddingLeft={2} fontWeight={400} fontSize={"1.2rem"} {...ps}>{children}</DoText>
+    <DoText paddingTop={1} paddingBottom={1} fontWeight={400} fontSize={"1.2rem"} {...ps}>{children}</DoText>
   )
 })
 
