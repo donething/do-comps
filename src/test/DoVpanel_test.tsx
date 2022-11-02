@@ -24,6 +24,8 @@ export const DoVpanelTest = () => {
       <Stack>
         <div>{count}</div>
         <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染</Button>
+        {/* 不用DIV包围会导致文本垂直不居中 */}
+        <div><Divider>分割线</Divider></div>
       </Stack>
 
       <DoPanel divider={genDivider} width={"500px"}>
