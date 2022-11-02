@@ -1,4 +1,4 @@
-import {DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader} from "../main"
+import {DoPanel, DoPanelContent, DoPanelFooter, DoPanelHeader, DoTextTitle} from "../main"
 import {Button, Divider, Stack} from "@mui/material"
 import React from "react"
 
@@ -11,7 +11,10 @@ export const DoVpanelTest = () => {
   const genDivider = React.useMemo(() => <Divider/>, [])
 
   const genChild = React.useMemo(() => (<>
-    <DoPanelHeader divider={genDivider}>标题</DoPanelHeader>
+    <DoPanelHeader divider={genDivider}>
+      <DoTextTitle>标题</DoTextTitle>
+      <Button>按钮</Button>
+    </DoPanelHeader>
     <DoPanelContent component={"ul"}>{v}</DoPanelContent>
     <DoPanelFooter divider={genDivider}>底部</DoPanelFooter>
   </>), [v, genDivider])

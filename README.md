@@ -322,7 +322,10 @@
   // 可能导致不必要的更新
   // 所以使用`useMemo`生成
   const genChild = React.useMemo(() => (<>
-     <DoPanelHeader divider={genDivider}>标题</DoPanelHeader>
+     <DoPanelHeader divider={genDivider}>
+        <DoTextTitle>标题</DoTextTitle>
+        <Button>按钮</Button>
+     </DoPanelHeader>
      <DoPanelContent component={"ul"}>{v}</DoPanelContent>
      <DoPanelFooter divider={genDivider}>底部</DoPanelFooter>
   </>), [v, genDivider])
