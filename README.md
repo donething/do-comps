@@ -287,7 +287,7 @@
 
   return (
     <Stack padding={1} gap={2}>
-       <DoTextFieldBtn label={"输入框1"} enterNode={"确定"} onEnter={handleEnter}/>
+       <DoTextFieldBtn label={"输入框1"} enterNode={"确定"} onEnter={handleEnter} clearAfterEnter/>
        <DoTextFieldBtn label={"输入框3"} size={"small"} enterNode={genSvgIcon} onEnter={handleEnter}/>
     </Stack>
   )

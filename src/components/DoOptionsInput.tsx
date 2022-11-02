@@ -27,19 +27,31 @@ export type OptionsListType = Array<{
 
 // 含前置选择框的输入框的选项
 export type DoOptionsInputProps = {
-  // 选择框的数据
+  /**
+   * 选择框的数据
+   */
   optionsList: OptionsListType
-
-  // 输入框的提示
+  /**
+   * 输入框的提示
+   */
   placeholder?: string
-
-  // 尺寸
+  /**
+   * 尺寸
+   */
   size?: "small" | "medium"
-
-  // 是否添加确认按钮，可为 ReactNode、文字
+  /**
+   * 当执行回车回调后清空输入框的文本
+   */
+  clearAfterEnter?: boolean
+  /**
+   * 是否添加确认按钮，可为 ReactNode、文字
+   */
   enterNode?: string | ReactNode,
-
-  // 点击确认按钮后的回调函数，参数依次为：输入框的值、选择框中被选择的值（为了兼容多选的情况，传递数组）、事件对象
+  /**
+   * 点击确认按钮后的回调函数，参数依次为：输入框的值、选择框中被选择的值（为了兼容多选的情况，传递数组）、事件对象
+   * @param value
+   * @param sList
+   */
   onEnter: (value: string, sList: Array<string>) => void
 }
 
@@ -90,7 +102,9 @@ const DoOptionsInput = React.memo((props: DoOptionsInputProps): JSX.Element => {
         {selectsList}
       </Stack>
       <DoTextFieldBtn label={props.placeholder} size={props.size} enterNode={props.enterNode}
-                      onEnter={value => props.onEnter(value, sList)}/>
+                      clearAfterEnter={props.clearAfterEnter}
+                      onEnter={value => props.onEnter(value, sList)}
+      />
     </Stack>
   )
 })
