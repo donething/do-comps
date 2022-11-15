@@ -138,7 +138,10 @@ const DoDialog = () => {
       <DialogTitle>{dialogProps.title}</DialogTitle>
 
       <DialogContent dividers={dialogProps.dividers}>
-        {dialogProps.message && <DialogContentText>{dialogProps.message}</DialogContentText>}
+        {dialogProps.message &&
+          <DialogContentText sx={{overflowX: "hidden", wordBreak: "break-all", whiteSpace: "break-spaces"}}>
+            {dialogProps.message}</DialogContentText>
+        }
         {dialogProps.content && dialogProps.content}
       </DialogContent>
 

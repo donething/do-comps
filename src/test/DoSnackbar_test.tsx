@@ -53,9 +53,18 @@ export const DoSnackbarTest = () => {
       </Button>
 
       <Button onClick={() => showDialog({
-        open: true, title: "标题", message: "消息3。", fullWidth: true
+        open: true, title: "标题", message: "消息3。\n消息3。\n消息3。", fullWidth: true
       })}>
         打开 Dialog3
+      </Button>
+
+      <Button onClick={() => showDialog({
+        open: true, title: "标题",
+        message: new Array(100).fill("MS4wLjABAAAA6SPZyhEA5-zRYJs-mNsm1Xj5PW1cGRJXZ9jx" +
+          "7bX5p7SwXo-a2ByHwlHbfzEbjLeroO").join("\n"),
+        fullWidth: true
+      })}>
+        打开 Dialog 长消息
       </Button>
 
       <Button onClick={() => showDrawer({open: true, content: "测试抽屉"})}>
