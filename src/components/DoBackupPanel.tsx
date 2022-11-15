@@ -54,8 +54,6 @@ const DoBackupPanel = React.memo((props: DoBackupPanelProps): JSX.Element => {
   const {showSb} = useSharedSnackbar()
   const {showDialog} = useSharedDialog()
 
-  console.log("重新渲染 组件")
-
   return (
     <Card sx={{width: 300}} {...props.cardProps}>
       <CardHeader title={props.title} action={<Button color={"warning"} onClick={() => {
