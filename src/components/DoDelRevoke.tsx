@@ -8,8 +8,7 @@ import React from "react"
  * **依赖** DoSnackbar 组件，可在`index.tsx`全局引入
  *
  * @param title 已删除元素的标题，不需要完整提示，如 “弥珠(162345)”
- * @param data 包含被删数据的对象，用于撤销删除，如 chromium storage 中存储的对象。设置，恢复使用不要
- * 如果改数据通过`setState`设置，务必不要用参数`origin`撤销，而是使用上下文中的参数再构造数据项来恢复
+ * @param data 包含被删数据的对象，用于撤销删除，如 chromium storage 中存储的对象
  * @param remove 删除组件绑定的状态，并保存
  * @param revoke 撤销删除，恢复数据，并保存
  * @param showSb 控制 DoSnackbar ，显示撤销按钮
