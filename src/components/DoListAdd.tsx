@@ -18,7 +18,7 @@ export type DoLItemProps = {
    */
   primary: React.ReactNode
   /**
-   * 描述内容，可以是组件，如`Stack`
+   * 描述内容，可以是组件，如`Stack`。如果报错嵌套<p>，可以设置属性 `component="span"`
    */
   secondary?: React.ReactNode
   /**
