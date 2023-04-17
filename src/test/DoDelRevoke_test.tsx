@@ -12,16 +12,19 @@ export const DoDelRevokeTest = () => {
   const {showSb} = useSharedSnackbar()
 
   const list1 = nums.map((item, index) => <li key={item}>
-    <Button onClick={() => delRevoke<Array<number>>(item, nums, () => {
+    <Button onClick={() => delRevoke<number>(item, item, () => {
         // 删除
         setNums(prev => {
-          let newArray = [...prev]
-          newArray.splice(index, 1)
+          const newArray = [...prev]
+          const i = newArray.findIndex((n) => n == item)
+          newArray.splice(i, 1)
           return newArray
         })
-      }, (data) => {
+        return undefined
+      }, data => {
         // 撤销
-        setNums(data)
+        setNums(prev => [...prev, data])
+        return undefined
       },
       showSb)}>{item}
     </Button>
@@ -39,7 +42,7 @@ export const DoDelRevokeTest = () => {
     <Stack spacing={3}>
       <div>{count}</div>
       <Button onClick={() => setCount(prev => ++prev)}>只更新计数时，不重新渲染 DoAutocomplete</Button>
-      
+
       <ul>
         {list1}
       </ul>
