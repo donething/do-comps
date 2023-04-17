@@ -13,14 +13,14 @@ import React from "react"
  * @param revoke 撤销删除操作。恢复被删除的 `data`，并保存数据。如果有响应式的显示数据，也要相应恢复
  * @param showSb 显示提示和撤销按钮
  */
-export const delRevoke = <T, >(title: string | number,
-                               data: T,
-                               remove: () => (Error | undefined),
-                               revoke: (origin: T) => (Error | undefined),
-                               showSb: (ps: DoSnackbarProps) => void) => {
+export const delRevoke = async <T, >(title: string | number,
+                                     data: T,
+                                     remove: () => Promise<(Error | undefined)>,
+                                     revoke: (origin: T) => Promise<(Error | undefined)>,
+                                     showSb: (ps: DoSnackbarProps) => void) => {
   // 开始删除信息（因为响应式，同时更新了界面）
   // 注意要保存修改
-  const err = remove()
+  const err = await remove()
   if (err) {
     console.log(`删除 ${title} 出错`, err)
     showSb({open: true, message: `删除 ${title} 出错`, severity: "error"})
@@ -33,8 +33,8 @@ export const delRevoke = <T, >(title: string | number,
     autoHideDuration: 6000,
     message: `是否撤销删除 ${title}`,
     showCloseBn: true,
-    action: <Button variant={"text"} color={"primary"} onClick={() => {
-      const err = revoke(data)
+    action: <Button variant={"text"} color={"primary"} onClick={async () => {
+      const err = await revoke(data)
       if (err) {
         console.log(`恢复 ${title} 出错：`, err)
         showSb({open: true, message: `恢复 ${title} 出错`, severity: "error"})

@@ -12,7 +12,7 @@ export const DoDelRevokeTest = () => {
   const {showSb} = useSharedSnackbar()
 
   const list1 = nums.map((item, index) => <li key={item}>
-    <Button onClick={() => delRevoke<number>(item, item, () => {
+    <Button onClick={() => delRevoke<number>(item, item, async () => {
         // 删除
         setNums(prev => {
           const newArray = [...prev]
@@ -21,7 +21,7 @@ export const DoDelRevokeTest = () => {
           return newArray
         })
         return undefined
-      }, data => {
+      }, async data => {
         // 撤销
         setNums(prev => [...prev, data])
         return undefined

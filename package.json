@@ -1,6 +1,6 @@
 {
   "name": "do-comps",
-  "version": "0.2.60",
+  "version": "0.2.61",
   "description": "常用组件库，基于 MUI",
   "type": "module",
   "main": "dist/main.js",
