@@ -17,6 +17,7 @@ import DoFileUpload, {DoFilesUploadProps} from "./components/DoFileUpload"
 import DoList, {DoListProps} from "./components/DoList"
 import DoAutocomplete, {DoAutocompleteProps} from "./components/DoAutoComplete"
 import DoPasswdField, {DoPasswdFieldProps} from "./components/DoPasswdField"
+import DoButtonLeftAligned, {DoButtonLeftAlignedProps} from "./components/DoButtonLeftAligned"
 
 export {DoBackupPanel, DoBackupPanelChromium}
 export type {DoBackupPanelProps, DoBackupPanelBaseProps}
@@ -60,3 +61,6 @@ export type {DoAutocompleteProps}
 
 export {DoPasswdField}
 export type {DoPasswdFieldProps}
+
+export {DoButtonLeftAligned}
+export type {DoButtonLeftAlignedProps}

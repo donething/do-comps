@@ -16,7 +16,7 @@ export const DoDelRevokeTest = () => {
         // 删除
         setNums(prev => {
           const newArray = [...prev]
-          const i = newArray.findIndex((n) => n == item)
+          const i = newArray.findIndex((n) => n === item)
           newArray.splice(i, 1)
           return newArray
         })

@@ -9,12 +9,13 @@ import {DoVpanelTest} from "./test/DoVpanel_test"
 import {DoOptionsInputTest} from "./test/DoOptionsInput_test"
 import {DoListAddTest} from "./test/DoListAdd_test"
 import {DoBackupPanelTest} from "./test/DoBackupPanel_test"
-import {DoBackdrop, DoDialog, DoDrawer, DoSnackbar} from "./main"
+import {DoBackdrop, DoButtonLeftAligned, DoDialog, DoDrawer, DoSnackbar} from "./main"
 import {DoDelRevokeTest} from "./test/DoDelRevoke_test"
 import {DoTextTest} from "./test/DoText_test"
 import {DoFileUploadTest} from "./test/DoFileUpload_test"
 import {DoListTest} from "./test/DoList_test"
 import {DoAutocompleteTest} from "./test/DoAutocomplete_test"
+import {DoButtonLeftAlignedTest} from "./test/DoButtonLeftAligned_test";
 
 const container = document.getElementById('root')
 const root = createRoot(container!)
@@ -32,6 +33,7 @@ root.render(
         <Route path="/DoSnackbar_Dialog" element={<DoSnackbarTest/>}/>
         <Route path="/DoTextFieldBtn" element={<DoTextFieldBtnTest/>}/>
         <Route path="/DoVpanel" element={<DoVpanelTest/>}/>
+        <Route path="/DoButtonLeftAligned" element={<DoButtonLeftAlignedTest/>}/>
         <Route path="/DoOptionsInput" element={<DoOptionsInputTest/>}/>
         <Route path="/DoListAdd" element={<DoListAddTest/>}/>
         <Route path="/DoBackupPanel" element={<DoBackupPanelTest/>}/>

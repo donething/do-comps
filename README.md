@@ -9,6 +9,64 @@
   import {DoAutocomplete, useSharedBackdrop, DoList, useSharedSnackbar} from "do-comps"
 ```
 
+# 新添加组件的步骤
+
+## 新建源码文件
+
+在`src/components`目录下，新建组件文件，格式为`.tsx`
+
+## 编写组件
+
+完成后，并导出`组件`、`props属性类型`、`useShared*`（可选）
+
+```jsx
+   // 属性类型
+   export type DoBackdropProps = {
+      // 是否显示
+      open: Boolean
+   }
+   
+   // 在其它地方共享
+   export const useSharedBackdrop = () => useBetween(useBackdrop)
+   
+   // 导出组件
+   export default DoBackdrop
+```
+
+## 再次导出组件
+
+在`main.tsx`中再次统一导出。如果自动提示无效，可以手动输入组件路径导出
+
+```jsx
+   import DoBackdrop, {DoBackdropProps, useSharedBackdrop} from "./components/DoBackdrop"
+   
+   export {DoBackdrop, useSharedBackdrop}
+   export type {DoBackdropProps}
+```
+
+### 测试组件
+
+1. 在`test`文件夹中新建测试文件`DoSnackbar_test.tsx`，编写使用对应组件的代码
+2. 在`index.tsx`文件中添加第一步中测试组件的路由。如果该组件是全局组件，可以在`Router`上面一层全局引用
+    ```jsx
+   <Route path="/DoSnackbar_Dialog" element={<DoSnackbarTest/>}/>
+   ```
+3. 在`App.tsx`文件中添加路由的入口，注意`to`对应上步的`path`
+    ```jsx
+   <Link to={"DoSnackbar_Dialog"}><Button size={"large"}>DoSnackbar_Dialog</Button></Link>
+   ```
+4. 执行`yarn start`点击入口，测试功能
+
+## 编译
+
+1. 执行`yarn build`
+
+## 发布
+
+1. 根据文档开头的提示，删除不必要的文件、文件夹
+2. 修改`package.json`中的版本信息`version`
+3. 执行`npm publish`，推送到仓库
+
 # 已编写组件
 
 ## DoBackupPanel、DoBackupPanelChromium
@@ -447,61 +505,3 @@
     </Stack>
   )
 ```
-
-# 新添加组件的步骤
-
-## 新建源码文件
-
-在`src/components`目录下，新建组件文件，格式为`.tsx`
-
-## 编写组件
-
-完成后，并导出`组件`、`props属性类型`、`useShared*`（可选）
-
-```jsx
-   // 属性类型
-   export type DoBackdropProps = {
-      // 是否显示
-      open: Boolean
-   }
-   
-   // 在其它地方共享
-   export const useSharedBackdrop = () => useBetween(useBackdrop)
-   
-   // 导出组件
-   export default DoBackdrop
-```
-
-## 再次导出组件
-
-在`main.tsx`中再次统一导出。如果自动提示无效，可以手动输入组件路径导出
-
-```jsx
-   import DoBackdrop, {DoBackdropProps, useSharedBackdrop} from "./components/DoBackdrop"
-   
-   export {DoBackdrop, useSharedBackdrop}
-   export type {DoBackdropProps}
-```
-
-### 测试组件
-
-1. 在`test`文件夹中新建测试文件`DoSnackbar_test.tsx`，编写使用对应组件的代码
-2. 在`index.tsx`文件中添加第一步中测试组件的路由。如果该组件是全局组件，可以在`Router`上面一层全局引用
-    ```jsx
-   <Route path="/DoSnackbar_Dialog" element={<DoSnackbarTest/>}/>
-   ```
-3. 在`App.tsx`文件中添加路由的入口，注意`to`对应上步的`path`
-    ```jsx
-   <Link to={"DoSnackbar_Dialog"}><Button size={"large"}>DoSnackbar_Dialog</Button></Link>
-   ```
-4. 执行`yarn start`点击入口，测试功能
-
-## 编译
-
-1. 执行`yarn build`
-
-## 发布
-
-1. 根据文档开头的提示，删除不必要的文件、文件夹
-2. 修改`package.json`中的版本信息`version`
-3. 执行`npm publish`，推送到仓库
