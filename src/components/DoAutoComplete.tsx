@@ -6,7 +6,7 @@ import {
   TextField
 } from "@mui/material"
 import React, {HTMLAttributes} from "react"
-import CloseIcon from '@mui/icons-material/Close'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 /**
  * 自动完成输入框组件的属性
@@ -39,9 +39,7 @@ const DoAutocomplete = React.memo((props: DoAutocompleteProps) => {
   const {label, options, onEnter, onDelOption, ...ps} = props
 
   return (
-    <Autocomplete size={"small"} disablePortal freeSolo {...ps} clearText={"清空"}
-                  options={options}
-
+    <Autocomplete size={"small"} disablePortal freeSolo clearText={"清空"} {...ps} options={options}
                   renderOption={(ops: HTMLAttributes<HTMLElement>, option: string) => {
                     return (
                       <ListItem {...ops}>
@@ -50,7 +48,7 @@ const DoAutocomplete = React.memo((props: DoAutocompleteProps) => {
                           e.stopPropagation()
                           onDelOption && onDelOption(option)
                         }}>
-                          <CloseIcon/>
+                          <DeleteIcon/>
                         </IconButton>
                       </ListItem>
                     )

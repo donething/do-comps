@@ -10,8 +10,6 @@ export const DoSnackbarTest = () => {
   const {showDrawer} = useSharedDrawer()
   const {showBackdrop} = useSharedBackdrop()
 
-  const handleSvgClick = React.useCallback(() => console.log("点击了SVG图标"), [])
-
   return (
     <Stack>
       <div>{count}</div>

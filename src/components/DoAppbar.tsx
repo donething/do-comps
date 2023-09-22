@@ -3,7 +3,7 @@ import {
   Drawer,
   IconButton,
   List,
-  ListItem, ListItemButton,
+  ListItemButton,
   ListItemIcon, ListItemText,
   Toolbar,
   Typography
@@ -49,7 +49,7 @@ const DoAppbar = () => {
       <Drawer open={open} anchor={"left"} onClose={() => setOpen(false)}>
         <List>
           {navInfo.map((item, index) =>
-            <ListItemButton  key={index} onClick={() => {
+            <ListItemButton key={index} onClick={() => {
               window.location.href = `/#/${item.router}`
               document.title = item.name
               setTitle(item.name)
